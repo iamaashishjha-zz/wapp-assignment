@@ -23,11 +23,16 @@ namespace wapp
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            txtName.Text = null;
+            txtEmail.Text = null;
+            txtPassword.Text = null;
+            slctRole.SelectedIndex = 0;
             Response.Redirect("~/login-auth.aspx");
         }
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
+            
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
             string name = txtName.Text;
             string email = txtEmail.Text;
@@ -47,7 +52,7 @@ namespace wapp
                 {
                     Session["error"] = "Email Already Registered. Login";
                     Session["user_email"] = txtEmail.Text;
-                    Response.Redirect("~/login.aspx");
+                    Response.Redirect("~/login-auth.aspx");
                 }
                 else
                 {

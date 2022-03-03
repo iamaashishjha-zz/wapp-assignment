@@ -41,7 +41,7 @@ namespace wapp
                     int id = (int)sdr["id"];
                     Session["user_id"] = id;
                     Session["user_email"] = null;
-                    Response.Redirect("~/index.aspx");
+                    Response.Redirect("~/home1.aspx");
 
                 }
                 else

@@ -18,9 +18,16 @@ namespace wapp
             }
             else if (Session["user_id"] == null)
             {
-                Response.Redirect("~/login.aspx");
+                Response.Redirect("~/login-auth.aspx");
             }
 
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Remove("user_id");
+            Session.Remove("user_email");
+            Response.Redirect("~/index1.aspx");
         }
     }
 }

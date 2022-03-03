@@ -11,7 +11,15 @@ namespace wapp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user_id"] != null)
+            {
+                Response.Redirect("~/home1.aspx");
+            }
+        }
 
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/login-auth.aspx");
         }
     }
 }
