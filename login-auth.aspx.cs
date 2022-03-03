@@ -35,12 +35,12 @@ namespace wapp
                 con.Open();
                 string qry = "select * from tblUsers where email='" + email + "' and password='" + password + "'";
                 SqlCommand cmd = new SqlCommand(qry, con);
-                SqlDataReader sdr = cmd.ExecuteReader();
-                if (sdr.Read())
+                SqlDataReader sdrLogin = cmd.ExecuteReader();
+                if (sdrLogin.Read())
                 {
-                    int id = (int)sdr["id"];
+                    int id = (int)sdrLogin["id"];
                     Session["user_id"] = id;
-                    Session["user_email"] = null;
+                    Session["user_email"] = email;
                     Response.Redirect("~/home1.aspx");
 
                 }
@@ -50,6 +50,8 @@ namespace wapp
                     lblError.Text = "Invalid Email/Passwords";
 
                 }
+
+                sdrLogin.Close();
             }
             catch (Exception ex)
             {

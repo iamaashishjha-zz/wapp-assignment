@@ -37,9 +37,10 @@ namespace wapp
             string name = txtName.Text;
             string email = txtEmail.Text;
             string password = txtPassword.Text;
-            int role = 0;
-            int sub_role = slctRole.SelectedIndex;
-
+            string address = txtAddress.Text;
+            string role = "User";
+            string sub_role_value = slctRole.SelectedItem.Value;
+            
 
             try
             {
@@ -59,16 +60,24 @@ namespace wapp
                     lblError.Visible = true;
                     lblError.Text = "Invalid Email/Passwords";
                 }
-
-                string qry = "insert into tblUsers values('@name','@email','@password','@role','@sub_role')";
+                sdr.Close();
+                emailcheckcmd.Dispose();
+                string qry = "insert into tblUsers(name,email,address,password,role,sub_role) values('" + name + "','" + email + "', '" + address + "', '" + password + "','" + role + "','" + sub_role_value + "')";
                 SqlCommand cmd = new SqlCommand(qry, con);
-                cmd.Parameters.AddWithValue("name", name);
-                cmd.Parameters.AddWithValue("email", email);
-                cmd.Parameters.AddWithValue("password", password);
-                cmd.Parameters.AddWithValue("role", role);
-                cmd.Parameters.AddWithValue("sub_role", sub_role);
-                cmd.ExecuteNonQuery();
-
+                SqlDataAdapter ds = new SqlDataAdapter();
+                ds.InsertCommand = cmd;
+                ds.InsertCommand.ExecuteNonQuery();
+                cmd.Dispose();
+                //cmd.Parameters.AddWithValue("name", name);
+                //cmd.Parameters.AddWithValue("email", email);
+                //cmd.Parameters.AddWithValue("address", address);
+                //cmd.Parameters.AddWithValue("password", password);
+                //cmd.Parameters.AddWithValue("role", role);
+                //cmd.Parameters.AddWithValue("sub_role", sub_role_value);
+                
+                //cmd.ExecuteNonQuery();
+                Session["error"] = "Email Registered Successfully. Login Now";
+                Response.Redirect("~/login-auth.aspx");
 
             }
             catch (Exception ex)
@@ -82,7 +91,7 @@ namespace wapp
                 txtEmail.Text = "";
                 txtEmail.Text = "";
                 txtPassword.Text = "";
-                slctRole.SelectedValue = "";
+                slctRole.SelectedIndex = 0;
                 txtCPassword.Text = "";
                 con.Close();
             }

@@ -15,6 +15,10 @@
             <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Invalid Format" ForeColor="Red" ValidationGroup="registerValidation" ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
             </b></label>
             &nbsp;<asp:TextBox runat="server" ID="txtEmail" placeholder="Enter Username"></asp:TextBox>
+
+            <label for="txtName"><b>Address<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtAddress" ErrorMessage="Address is required" ForeColor="Red" ValidationGroup="registerValidation"></asp:RequiredFieldValidator>
+            </b></label>
+            &nbsp;<asp:TextBox runat="server" ID="txtAddress" placeholder="Enter Username"></asp:TextBox>
             <label for="txtPassword"><b>Password<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Password is required" ForeColor="Red" ControlToValidate="txtPassword" ValidationGroup="registerValidation"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Invalid Password" ForeColor="#FF3300" ValidationExpression="^[\w ]{4,19}$" ControlToValidate="txtPassword" ValidationGroup="registerValidation"></asp:RegularExpressionValidator>
             </b></label>
@@ -26,8 +30,8 @@
             </b></label>
             &nbsp;<asp:DropDownList ID="slctRole" CssClass="select-dropdown" runat="server">
                 <asp:ListItem Value="0" disabled>Select One</asp:ListItem>
-                <asp:ListItem Text="Student" Value="1" />
-                <asp:ListItem Text="Teacher" Value="2" />
+                <asp:ListItem Text="Student" Value="Student" />
+                <asp:ListItem Text="Teacher" Value="Teacher" />
             </asp:DropDownList>
             <asp:Button runat="server" ID="btnLogin" CssClass="lgnbtn" Text="Login" OnClick="btnLogin_Click" />
             <asp:Button runat="server" ID="btnRegister" Text="Register" class="cnbtn" OnClick="btnRegister_Click" ValidationGroup="registerValidation"/>
