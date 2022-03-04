@@ -80,6 +80,37 @@
             <HeaderStyle BackColor="#663300" ForeColor="#ffffff"/>  
             <RowStyle BackColor="#e7ceb6"/>  
         </asp:GridView> 
+            <table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
+            <tr>
+                <td style="width: 150px">
+                    Name:<br />
+                    <asp:TextBox ID="txtName" runat="server" Width="140" />
+                </td>
+                <td style="width: 150px">
+                    Email:<br />
+                    <asp:TextBox ID="txtEmail" runat="server" Width="140" />
+                </td>
+                <td style="width: 150px">
+                    Address:<br />
+                    <asp:TextBox ID="txtAddress" runat="server" Width="140" />
+                </td>
+                <td style="width: 150px">
+                    Password:<br />
+                    <asp:TextBox ID="txtPassword" runat="server" Width="140" />
+                </td>
+                <td style="width: 150px">
+                    Role:<br />
+                    <asp:DropDownList ID="slctSubRole1" CssClass="select-dropdown" runat="server">
+                            <asp:ListItem Value="0" disabled>Select One</asp:ListItem>
+                            <asp:ListItem Text="Student" Value="Student" />
+                            <asp:ListItem Text="Teacher" Value="Teacher" />
+                        </asp:DropDownList>
+                </td>
+                <td style="width: 150px">
+                    <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="Insert" />
+                </td>
+            </tr>
+        </table>
         </div>
     </form>
 </body>

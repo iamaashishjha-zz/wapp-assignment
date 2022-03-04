@@ -19,18 +19,22 @@ namespace wapp
         DataTable dt;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if((Session["user_id"] != null) && (Session["user_role"] == "Admin"))
+            //if((Session["user_id"] != null) && (Session["user_role"] == "Admin"))
+            //{
+            //    if (!IsPostBack)
+            //    {
+            //        ShowData();
+            //    }
+            //}
+            //else
+            //{
+            //    Response.Redirect("~/index1.aspx");
+            //}
+            if (!IsPostBack)
             {
-                if (!IsPostBack)
-                {
-                    ShowData();
-                }
+                ShowData();
             }
-            else
-            {
-                Response.Redirect("~/index1.aspx");
-            }
-            
+
         }
 
         protected void ShowData()
@@ -97,19 +101,36 @@ namespace wapp
             ShowData();
         }
 
-        //protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != GridView1.EditIndex)
-        //    {
-        //        //(e.Row.Cells[0].Controls[0] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this row?');";
-        //        //btn_delete.Attributes.Add("onclick", "return yourJavaScriptFunction();");
-        //    }
-        //}
+        protected void Insert(object sender, EventArgs e)
+        {
+            dt = new DataTable();
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+            string name = txtName.Text;
+            string email = txtEmail.Text;
+            string address = txtAddress.Text;
+            string password = txtPassword.Text;
+            string role = "User";
+            string sub_role = slctSubRole1.SelectedValue;
+            string query = "INSERT INTO tblUsers VALUES(@name, @email, @address, @password, @role, @sub_role)";
+            SqlCommand cmd = new SqlCommand(query);
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@address", address);
+            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@role", role);
+            cmd.Parameters.AddWithValue("@sub_role", sub_role);
+            cmd.Connection = con;
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
 
-        //protected void btn_Delete_Click(object sender, EventArgs e)
-        //{
-        //    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Are You sure You want to delete?');", true);
-        //}
+            txtName.Text = null;
+            txtEmail.Text = null;
+            txtAddress.Text = null;
+            txtPassword.Text = null;
+            slctSubRole1.SelectedValue = null;
+            ShowData();
+        }
 
 
     }
