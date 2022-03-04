@@ -85,6 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="courses.aspx" />
     <Content Include="home1.aspx" />
     <Content Include="index.aspx" />
     <Content Include="index1.aspx" />
@@ -93,6 +94,7 @@
     <Content Include="auth.Master" />
     <Content Include="index.Master" />
     <Content Include="student.aspx" />
+    <Content Include="studentList.aspx" />
     <Content Include="userList.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -103,6 +105,13 @@
     </Compile>
     <Compile Include="auth.Master.designer.cs">
       <DependentUpon>auth.Master</DependentUpon>
+    </Compile>
+    <Compile Include="courses.aspx.cs">
+      <DependentUpon>courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="courses.aspx.designer.cs">
+      <DependentUpon>courses.aspx</DependentUpon>
     </Compile>
     <Compile Include="home1.aspx.cs">
       <DependentUpon>home1.aspx</DependentUpon>
@@ -153,6 +162,13 @@
     </Compile>
     <Compile Include="student.aspx.designer.cs">
       <DependentUpon>student.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="studentList.aspx.cs">
+      <DependentUpon>studentList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="studentList.aspx.designer.cs">
+      <DependentUpon>studentList.aspx</DependentUpon>
     </Compile>
     <Compile Include="userList.aspx.cs">
       <DependentUpon>userList.aspx</DependentUpon>

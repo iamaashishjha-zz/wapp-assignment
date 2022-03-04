@@ -1,16 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userList.aspx.cs" Inherits="wapp.userList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="courses.aspx.cs" Inherits="wapp.courses" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            width: 272px;
-        }
-        .select-dropdown {}
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -46,42 +40,30 @@
                         <asp:TextBox ID="txtName" runat="server" Text='<%#Eval("name") %>'></asp:TextBox>  
                     </EditItemTemplate>  
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Email">  
-                    <ItemTemplate>  
-                        <asp:Label ID="lbl_City" runat="server" Text='<%#Eval("email") %>'></asp:Label>  
-                    </ItemTemplate>  
-                    <EditItemTemplate>  
-                        <asp:TextBox ID="txtEmail" runat="server" Text='<%#Eval("email") %>'></asp:TextBox>  
-                    </EditItemTemplate>  
-                </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Address">
+                <asp:TemplateField HeaderText="Description">
                     <ItemTemplate>
-                        <asp:Label ID="lbl_Address" runat="server" Text='<%#Eval("address") %>'></asp:Label>
+                        <asp:Label ID="lbl_description" runat="server" Text='<%#Eval("description") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtAddress" runat="server" Text='<%#Eval("address") %>'></asp:TextBox>
+                        <asp:TextBox ID="txtDescription" runat="server" Text='<%#Eval("description") %>'></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Role">
+                <asp:TemplateField HeaderText="Start Date">
                     <ItemTemplate>
-                        <asp:Label ID="lbl_Role" runat="server" Text='<%#Eval("role") %>'></asp:Label>
-                    </ItemTemplate>
-                    
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Sub Role">
-                    <ItemTemplate>
-                        <asp:Label ID="lbl_Sub_Role" runat="server" Text='<%#Eval("sub_role") %>'></asp:Label>
+                        <asp:Label ID="lbl_StartDate" runat="server" Text='<%#Eval("start_date") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <%--<asp:TextBox ID="txtSubRole" runat="server" Text='<%#Eval("sub_role") %>'></asp:TextBox>--%>
-                        <asp:DropDownList ID="slctSubRole" CssClass="select-dropdown" runat="server">
-                            <asp:ListItem Value="0" disabled>Select One</asp:ListItem>
-                            <asp:ListItem Text="Student" Value="Student" />
-                            <asp:ListItem Text="Teacher" Value="Teacher" />
-                        </asp:DropDownList>
+                        <asp:TextBox ID="txtStartDate" runat="server" Text='<%#Eval("start_date") %>'></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
-
+                <asp:TemplateField HeaderText="End Date">
+                    <ItemTemplate>
+                        <asp:Label ID="lbl_EndDate" runat="server" Text='<%#Eval("end_date") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtEndDate" runat="server" Text='<%#Eval("end_date") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                </asp:TemplateField>
             </Columns>  
             <HeaderStyle BackColor="#663300" ForeColor="#ffffff"/>  
             <RowStyle BackColor="#e7ceb6"/>  
@@ -93,24 +75,16 @@
                     <asp:TextBox ID="txtName" runat="server" Width="158px" />
                 </td>
                 <td style="width: 150px">
-                    Email:<br />
-                    <asp:TextBox ID="txtEmail" runat="server" Width="235px" />
+                    Description:<br />
+                    <asp:TextBox ID="txtDescription" runat="server" Width="234px" />
                 </td>
                 <td style="width: 150px">
-                    Address:<br />
-                    <asp:TextBox ID="txtAddress" runat="server" Width="234px" />
-                </td>
-                <td style="width: 150px">
-                    Password:<br />
-                    <asp:TextBox ID="txtPassword" runat="server" Width="241px" />
+                    Start Date:<br />
+                    <asp:TextBox ID="txtStartDate" runat="server" Width="241px" />
                 </td>
                 <td class="auto-style1">
-                    Role:<br />
-                    <asp:DropDownList ID="slctSubRole1" CssClass="select-dropdown" runat="server" Width="268px">
-                            <asp:ListItem Value="0" disabled>Select One</asp:ListItem>
-                            <asp:ListItem Text="Student" Value="Student" />
-                            <asp:ListItem Text="Teacher" Value="Teacher" />
-                        </asp:DropDownList>
+                    End Date:<br />
+                     <asp:TextBox ID="txtEndDate" runat="server" Width="241px" />
                 </td>
                 <td style="width: 150px">
                     <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="Insert" BackColor="#66FF33" ForeColor="White" Width="126px" />

@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace wapp
 {
-    public partial class userList : System.Web.UI.Page
+    public partial class courses : System.Web.UI.Page
     {
 
 
@@ -43,7 +43,7 @@ namespace wapp
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
-            adapt = new SqlDataAdapter("Select Id,name,email,address,role,sub_role from tblUsers", con);
+            adapt = new SqlDataAdapter("Select id,name,description,start_date,end_date from tblCourses", con);
             adapt.Fill(dt);
             if (dt.Rows.Count > 0)
             {
@@ -64,16 +64,16 @@ namespace wapp
             //Finding the controls from Gridview for the row which is going to update  
             Label id = GridView1.Rows[e.RowIndex].FindControl("lbl_ID") as Label;
             TextBox name = GridView1.Rows[e.RowIndex].FindControl("txtName") as TextBox;
-            TextBox email = GridView1.Rows[e.RowIndex].FindControl("txtEmail") as TextBox;
-            TextBox address = GridView1.Rows[e.RowIndex].FindControl("txtAddress") as TextBox;
-            TextBox role = GridView1.Rows[e.RowIndex].FindControl("txtRole") as TextBox;
+            TextBox description = GridView1.Rows[e.RowIndex].FindControl("txtDescription") as TextBox;
+            TextBox start_date = GridView1.Rows[e.RowIndex].FindControl("txtStartDate") as TextBox;
+            TextBox end_date = GridView1.Rows[e.RowIndex].FindControl("txtEndDate") as TextBox;
             //TextBox sub_role = GridView1.Rows[e.RowIndex].FindControl("txtSubRole") as TextBox;
-            DropDownList ddList = (DropDownList)GridView1.Rows[e.RowIndex].FindControl("slctSubRole");
+            //DropDownList ddList = (DropDownList)GridView1.Rows[e.RowIndex].FindControl("slctSubRole");
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
             //updating the record  
-            SqlCommand cmd = new SqlCommand("Update tblUsers set name='" + name.Text + "',email='" + email.Text + "',address='" + address.Text + "',sub_role='" + ddList.SelectedValue + "' where ID=" + Convert.ToInt32(id.Text), con);
+            SqlCommand cmd = new SqlCommand("Update tblCourses set name='" + name.Text + "',description='" + description.Text + "',start_date='" + start_date.Text + "',end_date='" + end_date.Text + "' where ID=" + Convert.ToInt32(id.Text), con);
             cmd.ExecuteNonQuery();
             con.Close();
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
@@ -90,12 +90,12 @@ namespace wapp
 
         protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            
+
             GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
-            Label lbldeleteid = (Label) row.FindControl("Id");
+            Label lbldeleteid = (Label)row.FindControl("Id");
             int id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
             con.Open();
-            SqlCommand cmd = new SqlCommand("DELETE FROM tblUsers WHERE id = '"+id+"'",con);
+            SqlCommand cmd = new SqlCommand("DELETE FROM tblCourses WHERE id = '" + id + "'", con);
             cmd.ExecuteNonQuery();
             con.Close();
             ShowData();
@@ -105,33 +105,32 @@ namespace wapp
         {
             dt = new DataTable();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+
             string name = txtName.Text;
-            string email = txtEmail.Text;
-            string address = txtAddress.Text;
-            string password = txtPassword.Text;
-            string role = "User";
-            string sub_role = slctSubRole1.SelectedValue;
-            string query = "INSERT INTO tblUsers VALUES(@name, @email, @address, @password, @role, @sub_role)";
+            string description = txtDescription.Text;
+            string start_date = txtStartDate.Text;
+            string end_date = txtEndDate.Text;
+
+            //string user_id = Session["user_id"].ToString();
+            int user_id = 1;
+
+            string query = "INSERT INTO tblCourses VALUES(@name, @description, @start_date, @end_date, @user_id)";
             SqlCommand cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@name", name);
-            cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@address", address);
-            cmd.Parameters.AddWithValue("@password", password);
-            cmd.Parameters.AddWithValue("@role", role);
-            cmd.Parameters.AddWithValue("@sub_role", sub_role);
+            cmd.Parameters.AddWithValue("@description", description);
+            cmd.Parameters.AddWithValue("@start_date", start_date);
+            cmd.Parameters.AddWithValue("@end_date", end_date);
+            cmd.Parameters.AddWithValue("@user_id", user_id);
             cmd.Connection = con;
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
 
             txtName.Text = null;
-            txtEmail.Text = null;
-            txtAddress.Text = null;
-            txtPassword.Text = null;
-            slctSubRole1.SelectedValue = null;
+            txtDescription.Text = null;
+            txtStartDate.Text = null;
+            txtEndDate.Text = null;
             ShowData();
         }
-
-        
     }
 }
