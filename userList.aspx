@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userLists.aspx.cs" Inherits="wapp.userLists" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userList.aspx.cs" Inherits="wapp.userList" %>
 
 <!DOCTYPE html>
 
@@ -29,20 +29,43 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
                 </asp:TemplateField>  
                 <asp:TemplateField HeaderText="Name">  
                     <ItemTemplate>  
-                        <asp:Label ID="lbl_Name" runat="server" Text='<%#Eval("Name") %>'></asp:Label>  
+                        <asp:Label ID="lbl_Name" runat="server" Text='<%#Eval("name") %>'></asp:Label>  
                     </ItemTemplate>  
                     <EditItemTemplate>  
-                        <asp:TextBox ID="txt_Name" runat="server" Text='<%#Eval("Name") %>'></asp:TextBox>  
+                        <asp:TextBox ID="txtName" runat="server" Text='<%#Eval("name") %>'></asp:TextBox>  
                     </EditItemTemplate>  
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="City">  
+                <asp:TemplateField HeaderText="Email">  
                     <ItemTemplate>  
-                        <asp:Label ID="lbl_City" runat="server" Text='<%#Eval("City") %>'></asp:Label>  
+                        <asp:Label ID="lbl_City" runat="server" Text='<%#Eval("email") %>'></asp:Label>  
                     </ItemTemplate>  
                     <EditItemTemplate>  
-                        <asp:TextBox ID="txt_City" runat="server" Text='<%#Eval("City") %>'></asp:TextBox>  
+                        <asp:TextBox ID="txtEmail" runat="server" Text='<%#Eval("email") %>'></asp:TextBox>  
                     </EditItemTemplate>  
                 </asp:TemplateField>  
+                <asp:TemplateField HeaderText="Address">
+                    <ItemTemplate>
+                        <asp:Label ID="lbl_Address" runat="server" Text='<%#Eval("address") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtAddress" runat="server" Text='<%#Eval("address") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Role">
+                    <ItemTemplate>
+                        <asp:Label ID="lbl_Role" runat="server" Text='<%#Eval("role") %>'></asp:Label>
+                    </ItemTemplate>
+                    
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Sub Role">
+                    <ItemTemplate>
+                        <asp:Label ID="lbl_Sub_Role" runat="server" Text='<%#Eval("sub_role") %>'></asp:Label>
+                    </ItemTemplate>
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtSubRole" runat="server" Text='<%#Eval("sub_role") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                </asp:TemplateField>
+
             </Columns>  
             <HeaderStyle BackColor="#663300" ForeColor="#ffffff"/>  
             <RowStyle BackColor="#e7ceb6"/>  
