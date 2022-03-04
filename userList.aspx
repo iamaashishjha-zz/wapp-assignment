@@ -9,10 +9,15 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="GridView1_RowCancelingEdit"   
-  
-OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">  
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="GridView1_RowCancelingEdit"
+                            OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" DataKeyNames="Id" 
+                 OnRowDeleting="OnRowDeleting" EmptyDataText="No records has been added.">  
             <Columns>  
+                <asp:TemplateField>  
+                    <ItemTemplate>  
+                        <asp:Button ID="btn_delete" runat="server" Text="Delete" CommandName="Delete"/>  
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField>  
                     <ItemTemplate>  
                         <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" />  
@@ -62,7 +67,12 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating">
                         <asp:Label ID="lbl_Sub_Role" runat="server" Text='<%#Eval("sub_role") %>'></asp:Label>
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox ID="txtSubRole" runat="server" Text='<%#Eval("sub_role") %>'></asp:TextBox>
+                        <%--<asp:TextBox ID="txtSubRole" runat="server" Text='<%#Eval("sub_role") %>'></asp:TextBox>--%>
+                        <asp:DropDownList ID="slctSubRole" CssClass="select-dropdown" runat="server">
+                            <asp:ListItem Value="0" disabled>Select One</asp:ListItem>
+                            <asp:ListItem Text="Student" Value="Student" />
+                            <asp:ListItem Text="Teacher" Value="Teacher" />
+                        </asp:DropDownList>
                     </EditItemTemplate>
                 </asp:TemplateField>
 

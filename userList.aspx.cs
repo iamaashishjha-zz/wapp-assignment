@@ -19,10 +19,18 @@ namespace wapp
         DataTable dt;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if((Session["user_id"] != null) && (Session["user_role"] == "Admin"))
             {
-                ShowData();
+                if (!IsPostBack)
+                {
+                    ShowData();
+                }
             }
+            else
+            {
+                Response.Redirect("~/index1.aspx");
+            }
+            
         }
 
         protected void ShowData()
@@ -55,12 +63,13 @@ namespace wapp
             TextBox email = GridView1.Rows[e.RowIndex].FindControl("txtEmail") as TextBox;
             TextBox address = GridView1.Rows[e.RowIndex].FindControl("txtAddress") as TextBox;
             TextBox role = GridView1.Rows[e.RowIndex].FindControl("txtRole") as TextBox;
-            TextBox sub_role = GridView1.Rows[e.RowIndex].FindControl("txtSubRole") as TextBox;
+            //TextBox sub_role = GridView1.Rows[e.RowIndex].FindControl("txtSubRole") as TextBox;
+            DropDownList ddList = (DropDownList)GridView1.Rows[e.RowIndex].FindControl("slctSubRole");
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
             //updating the record  
-            SqlCommand cmd = new SqlCommand("Update tblUsers set name='" + name.Text + "',email='" + email.Text + "',address='" + address.Text + "',sub_role='" + sub_role.Text + "' where ID=" + Convert.ToInt32(id.Text), con);
+            SqlCommand cmd = new SqlCommand("Update tblUsers set name='" + name.Text + "',email='" + email.Text + "',address='" + address.Text + "',sub_role='" + ddList.SelectedValue + "' where ID=" + Convert.ToInt32(id.Text), con);
             cmd.ExecuteNonQuery();
             con.Close();
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
@@ -74,5 +83,34 @@ namespace wapp
             GridView1.EditIndex = -1;
             ShowData();
         }
+
+        protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            
+            GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+            Label lbldeleteid = (Label) row.FindControl("Id");
+            int id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+            con.Open();
+            SqlCommand cmd = new SqlCommand("DELETE FROM tblUsers WHERE id = '"+id+"'",con);
+            cmd.ExecuteNonQuery();
+            con.Close();
+            ShowData();
+        }
+
+        //protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    if (e.Row.RowType == DataControlRowType.DataRow && e.Row.RowIndex != GridView1.EditIndex)
+        //    {
+        //        //(e.Row.Cells[0].Controls[0] as LinkButton).Attributes["onclick"] = "return confirm('Do you want to delete this row?');";
+        //        //btn_delete.Attributes.Add("onclick", "return yourJavaScriptFunction();");
+        //    }
+        //}
+
+        //protected void btn_Delete_Click(object sender, EventArgs e)
+        //{
+        //    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Are You sure You want to delete?');", true);
+        //}
+
+
     }
 }

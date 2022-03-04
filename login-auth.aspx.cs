@@ -39,7 +39,9 @@ namespace wapp
                 if (sdrLogin.Read())
                 {
                     int id = (int)sdrLogin["id"];
+                    string role = (string)sdrLogin["role"];
                     Session["user_id"] = id;
+                    Session["user_role"] = role;
                     Session["user_email"] = email;
                     Response.Redirect("~/home1.aspx");
 
