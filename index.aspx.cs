@@ -11,14 +11,7 @@ namespace wapp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["null"] == null)
-            //{
-            //    lblTitle.Text = "Index Page";
-            //}
-            //else
-            //{
-            //    lblTitle.Text = "Home Page";
-            //}
+
         }
     }
 }

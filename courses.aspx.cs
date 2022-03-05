@@ -28,7 +28,7 @@ namespace wapp
             //}
             //else
             //{
-            //    Response.Redirect("~/index1.aspx");
+            //    Response.Redirect("~/index.aspx");
             //}
             if (!IsPostBack)
             {

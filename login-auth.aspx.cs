@@ -13,14 +13,21 @@ namespace wapp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["error"] != null)
+            if(Session["user_id"] == null)
             {
-                lblError.Visible = true;
-                lblError.Text = Session["error"].ToString();
+                if (Session["error"] != null)
+                {
+                    lblError.Visible = true;
+                    lblError.Text = Session["error"].ToString();
+                }
+                if (Session["email"] != null)
+                {
+                    txtEmail.Text = Session["user_email"].ToString();
+                }
             }
-            if (Session["email"] != null)
+            else
             {
-                txtEmail.Text = Session["user_email"].ToString();
+                Response.Redirect("~/home.aspx");
             }
         }
 
@@ -40,10 +47,12 @@ namespace wapp
                 {
                     int id = (int)sdrLogin["id"];
                     string role = (string)sdrLogin["role"];
+                    string sub_role = (string)sdrLogin["sub_role"];
                     Session["user_id"] = id;
                     Session["user_role"] = role;
+                    Session["user_sub_role"] = sub_role;
                     Session["user_email"] = email;
-                    Response.Redirect("~/home1.aspx");
+                    Response.Redirect("~/home.aspx");
 
                 }
                 else

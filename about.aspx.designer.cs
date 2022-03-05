@@ -11,7 +11,7 @@ namespace wapp
 {
 
 
-    public partial class student
+    public partial class about
     {
     }
 }
