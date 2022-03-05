@@ -88,17 +88,21 @@
     <Content Include="about.aspx" />
     <Content Include="adminDashboard.aspx" />
     <Content Include="contact.aspx" />
+    <Content Include="courseDashboard.aspx" />
     <Content Include="courses.aspx" />
+    <Content Include="feedbackDashboard.aspx" />
     <Content Include="home.aspx" />
     <Content Include="index.aspx" />
     <Content Include="login-auth.aspx" />
     <Content Include="register-auth.aspx" />
     <Content Include="auth.Master" />
     <Content Include="index.Master" />
+    <Content Include="Shared\css.css" />
     <Content Include="stuDashboard.aspx" />
+    <Content Include="studentCourse.aspx" />
     <Content Include="teachDashboard.aspx" />
+    <Content Include="userDashboard.aspx" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="about.aspx.cs">
@@ -129,6 +133,13 @@
     <Compile Include="contact.aspx.designer.cs">
       <DependentUpon>contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="courseDashboard.aspx.cs">
+      <DependentUpon>courseDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="courseDashboard.aspx.designer.cs">
+      <DependentUpon>courseDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="courses.aspx.cs">
       <DependentUpon>courses.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -142,6 +153,13 @@
     </Compile>
     <Compile Include="dashboard.Master.designer.cs">
       <DependentUpon>dashboard.Master</DependentUpon>
+    </Compile>
+    <Compile Include="feedbackDashboard.aspx.cs">
+      <DependentUpon>feedbackDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="feedbackDashboard.aspx.designer.cs">
+      <DependentUpon>feedbackDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
@@ -186,6 +204,13 @@
     <Compile Include="stuDashboard.aspx.designer.cs">
       <DependentUpon>stuDashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="studentCourse.aspx.cs">
+      <DependentUpon>studentCourse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="studentCourse.aspx.designer.cs">
+      <DependentUpon>studentCourse.aspx</DependentUpon>
+    </Compile>
     <Compile Include="teachDashboard.aspx.cs">
       <DependentUpon>teachDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -193,12 +218,12 @@
     <Compile Include="teachDashboard.aspx.designer.cs">
       <DependentUpon>teachDashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="userDashboard.aspx.cs">
+      <DependentUpon>userDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="userDashboard.aspx.designer.cs">
+      <DependentUpon>userDashboard.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -214,7 +239,6 @@
   <ItemGroup>
     <Folder Include="Images\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Shared\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

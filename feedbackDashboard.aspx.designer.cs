@@ -11,25 +11,16 @@ namespace wapp
 {
 
 
-    public partial class home
+    public partial class feedbackDashboard
     {
 
         /// <summary>
-        /// btnDashboard control.
+        /// grdFeedback control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDashboard;
-
-        /// <summary>
-        /// btnLogout control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnLogout;
+        protected global::System.Web.UI.WebControls.GridView grdFeedback;
     }
 }

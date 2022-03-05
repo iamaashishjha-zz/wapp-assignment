@@ -28,13 +28,16 @@ namespace wapp
             string email = txtEmail.Text;
             string subject = txtSubject.Text;
             string message = txtMessage.Text;
+            DateTime date = DateTime.Now;
 
-            string query = "INSERT INTO tblFeedback VALUES(@name, @email, @subject, @message)";
+            string query = "INSERT INTO tblFeedback VALUES(@name, @email, @subject, @message, @created_at)";
             SqlCommand cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@name", name);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@subject", subject);
             cmd.Parameters.AddWithValue("@message", message);
+            cmd.Parameters.AddWithValue("@created_at", date.ToString());
+
             cmd.Connection = con;
             con.Open();
             cmd.ExecuteNonQuery();
@@ -45,7 +48,7 @@ namespace wapp
             txtSubject.Text = null;
             txtMessage.Text = null;
 
-            Response.Redirect("~/webform1.aspx");
+            Response.Redirect("~/index.aspx");
         }
     }
 }

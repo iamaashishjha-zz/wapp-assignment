@@ -19,27 +19,23 @@ namespace wapp
         DataTable dt3;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((Session["user_id"] != null) && (Session["user_role"] == "Admin"))
+            if ((Session["user_id"] != null) && (Session["user_role"].ToString() == "Admin"))
             {
                 if (!IsPostBack)
                 {
-                    ShowData();
+                    shwUsersGrid();
+                    shwCourseGrid();
+                    shwFeedbackGrid();
+                    BindRepeator();
                 }
             }
             else
             {
                 Response.Redirect("~/home.aspx");
             }
-            //if (!IsPostBack)
-            //{
-            //    ShowData();
-            //    ShowData2();
-            //    ShowData3();
-            //}
-
         }
 
-        protected void ShowData()
+        protected void shwUsersGrid()
         {
             dt = new DataTable();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
@@ -49,28 +45,28 @@ namespace wapp
             adapt.Fill(dt);
             if (dt.Rows.Count > 0)
             {
-                GridView1.DataSource = dt;
-                GridView1.DataBind();
+                grdUsers.DataSource = dt;
+                grdUsers.DataBind();
             }
             con.Close();
         }
 
-        protected void GridView1_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
+        protected void grdUsers_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             //NewEditIndex property used to determine the index of the row being edited.  
-            GridView1.EditIndex = e.NewEditIndex;
-            ShowData();
+            grdUsers.EditIndex = e.NewEditIndex;
+            shwUsersGrid();
         }
-        protected void GridView1_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+        protected void grdUsers_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
         {
             //Finding the controls from Gridview for the row which is going to update  
-            Label id = GridView1.Rows[e.RowIndex].FindControl("lbl_ID") as Label;
-            TextBox name = GridView1.Rows[e.RowIndex].FindControl("txtName") as TextBox;
-            TextBox email = GridView1.Rows[e.RowIndex].FindControl("txtEmail") as TextBox;
-            TextBox address = GridView1.Rows[e.RowIndex].FindControl("txtAddress") as TextBox;
-            TextBox role = GridView1.Rows[e.RowIndex].FindControl("txtRole") as TextBox;
+            Label id = grdUsers.Rows[e.RowIndex].FindControl("lbl_ID") as Label;
+            TextBox name = grdUsers.Rows[e.RowIndex].FindControl("txtName") as TextBox;
+            TextBox email = grdUsers.Rows[e.RowIndex].FindControl("txtEmail") as TextBox;
+            TextBox address = grdUsers.Rows[e.RowIndex].FindControl("txtAddress") as TextBox;
+            TextBox role = grdUsers.Rows[e.RowIndex].FindControl("txtRole") as TextBox;
             //TextBox sub_role = GridView1.Rows[e.RowIndex].FindControl("txtSubRole") as TextBox;
-            DropDownList ddList = (DropDownList)GridView1.Rows[e.RowIndex].FindControl("slctSubRole");
+            DropDownList ddList = (DropDownList)grdUsers.Rows[e.RowIndex].FindControl("slctSubRole");
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
@@ -79,31 +75,31 @@ namespace wapp
             cmd.ExecuteNonQuery();
             con.Close();
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
-            GridView1.EditIndex = -1;
+            grdUsers.EditIndex = -1;
             //Call ShowData method for displaying updated data  
-            ShowData();
+            shwUsersGrid();
         }
-        protected void GridView1_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
+        protected void grdUsers_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
-            GridView1.EditIndex = -1;
-            ShowData();
+            grdUsers.EditIndex = -1;
+            shwUsersGrid();
         }
 
-        protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+        protected void grdUsers_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
-            GridViewRow row = (GridViewRow)GridView1.Rows[e.RowIndex];
+            GridViewRow row = (GridViewRow)grdUsers.Rows[e.RowIndex];
             Label lbldeleteid = (Label)row.FindControl("Id");
-            int id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+            int id = Convert.ToInt32(grdUsers.DataKeys[e.RowIndex].Value.ToString());
             con.Open();
             SqlCommand cmd = new SqlCommand("DELETE FROM tblUsers WHERE id = '" + id + "'", con);
             cmd.ExecuteNonQuery();
             con.Close();
-            ShowData();
+            shwUsersGrid();
         }
 
-        protected void Insert(object sender, EventArgs e)
+        protected void btnAddUser_Click(object sender, EventArgs e)
         {
             dt = new DataTable();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
@@ -125,49 +121,46 @@ namespace wapp
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
-
             txtName.Text = null;
             txtEmail.Text = null;
             txtAddress.Text = null;
             txtPassword.Text = null;
             slctSubRole1.SelectedValue = null;
-            ShowData();
+            shwUsersGrid();
         }
 
-
-
-
-
-        protected void ShowData2()
+        protected void shwCourseGrid()
         {
             dt2 = new DataTable();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
-            adapt = new SqlDataAdapter("Select id,name,description,start_date,end_date from tblCourses", con);
+            string query = "Select course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id; ";
+
+            adapt = new SqlDataAdapter(query, con);
             adapt.Fill(dt2);
             if (dt2.Rows.Count > 0)
             {
-                GridView2.DataSource = dt2;
-                GridView2.DataBind();
+                grdCourses.DataSource = dt2;
+                grdCourses.DataBind();
             }
             con.Close();
         }
 
-        protected void GridView2_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
+        protected void grdCourses_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             //NewEditIndex property used to determine the index of the row being edited.  
-            GridView2.EditIndex = e.NewEditIndex;
-            ShowData2();
+            grdCourses.EditIndex = e.NewEditIndex;
+            shwCourseGrid();
         }
-        protected void GridView2_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+        protected void grdCourses_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
         {
             //Finding the controls from Gridview for the row which is going to update  
-            Label id = GridView2.Rows[e.RowIndex].FindControl("lbl_ID") as Label;
-            TextBox name = GridView2.Rows[e.RowIndex].FindControl("txtName") as TextBox;
-            TextBox description = GridView2.Rows[e.RowIndex].FindControl("txtDescription") as TextBox;
-            TextBox start_date = GridView2.Rows[e.RowIndex].FindControl("txtStartDate") as TextBox;
-            TextBox end_date = GridView2.Rows[e.RowIndex].FindControl("txtEndDate") as TextBox;
+            Label id = grdCourses.Rows[e.RowIndex].FindControl("lbl_ID") as Label;
+            TextBox name = grdCourses.Rows[e.RowIndex].FindControl("txtName") as TextBox;
+            TextBox description = grdCourses.Rows[e.RowIndex].FindControl("txtDescription") as TextBox;
+            TextBox start_date = grdCourses.Rows[e.RowIndex].FindControl("txtStartDate") as TextBox;
+            TextBox end_date = grdCourses.Rows[e.RowIndex].FindControl("txtEndDate") as TextBox;
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
@@ -176,31 +169,31 @@ namespace wapp
             cmd.ExecuteNonQuery();
             con.Close();
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
-            GridView2.EditIndex = -1;
+            grdCourses.EditIndex = -1;
             //Call ShowData method for displaying updated data  
-            ShowData2();
+            shwCourseGrid();
         }
-        protected void GridView2_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
+        protected void grdCourses_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
-            GridView2.EditIndex = -1;
-            ShowData2();
+            grdCourses.EditIndex = -1;
+            shwCourseGrid();
         }
 
-        protected void OnRowDeleting2(object sender, GridViewDeleteEventArgs e)
+        protected void grdCourses_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
-            GridViewRow row = (GridViewRow)GridView2.Rows[e.RowIndex];
+            GridViewRow row = (GridViewRow)grdCourses.Rows[e.RowIndex];
             Label lbldeleteid = (Label)row.FindControl("Id");
-            int id = Convert.ToInt32(GridView2.DataKeys[e.RowIndex].Value.ToString());
+            int id = Convert.ToInt32(grdCourses.DataKeys[e.RowIndex].Value.ToString());
             con.Open();
             SqlCommand cmd = new SqlCommand("DELETE FROM tblCourses WHERE id = '" + id + "'", con);
             cmd.ExecuteNonQuery();
             con.Close();
-            ShowData2();
+            shwCourseGrid();
         }
 
-        protected void Insert2(object sender, EventArgs e)
+        protected void btnAddCourse_Click(object sender, EventArgs e)
         {
             dt2 = new DataTable();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
@@ -229,12 +222,12 @@ namespace wapp
             txtDescription.Text = null;
             txtStartDate.Text = null;
             txtEndDate.Text = null;
-            ShowData2();
+            shwCourseGrid();
         }
 
-        protected void ShowData3()
+        protected void shwFeedbackGrid()
         {
-            dt3 = new DataTable();
+             dt3 = new DataTable();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
@@ -242,23 +235,69 @@ namespace wapp
             adapt.Fill(dt3);
             if (dt3.Rows.Count > 0)
             {
-                GridView3.DataSource = dt3;
-                GridView3.DataBind();
+                grdFeedback.DataSource = dt3;
+                grdFeedback.DataBind();
             }
             con.Close();
         }
 
-        protected void OnRowDeleting3(object sender, GridViewDeleteEventArgs e)
+        protected void grdFeedback_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
 
-            GridViewRow row = (GridViewRow)GridView3.Rows[e.RowIndex];
+            GridViewRow row = (GridViewRow)grdFeedback.Rows[e.RowIndex];
             Label lbldeleteid = (Label)row.FindControl("Id");
-            int id = Convert.ToInt32(GridView3.DataKeys[e.RowIndex].Value.ToString());
+            int id = Convert.ToInt32(grdFeedback.DataKeys[e.RowIndex].Value.ToString());
             con.Open();
             SqlCommand cmd = new SqlCommand("DELETE FROM tblFeedback WHERE id = '" + id + "'", con);
             cmd.ExecuteNonQuery();
             con.Close();
-            ShowData3();
+            shwFeedbackGrid();
+        }
+
+        private void BindRepeator()
+        {
+            string CS = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
+            //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("getCourseStudentDetails", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                Repeater1.DataSource = cmd.ExecuteReader();
+                Repeater1.DataBind();
+            }
+        }
+
+        protected void btnSortCourses_Click(object sender, EventArgs e)
+        {
+            dt3 = new DataTable();
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+
+            con.Open();
+            adapt = new SqlDataAdapter("Select course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id ORDER BY course.created_at DESC", con);
+            adapt.Fill(dt3);
+            if (dt3.Rows.Count > 0)
+            {
+                grdCourses.DataSource = dt3;
+                grdCourses.DataBind();
+            }
+            con.Close();
+        }
+
+        protected void btnSortStartDate_Click(object sender, EventArgs e)
+        {
+            dt3 = new DataTable();
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+
+            con.Open();
+            adapt = new SqlDataAdapter("Select course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id ORDER BY course.start_date DESC", con);
+            adapt.Fill(dt3);
+            if (dt3.Rows.Count > 0)
+            {
+                grdCourses.DataSource = dt3;
+                grdCourses.DataBind();
+            }
+            con.Close();
         }
     }
 }

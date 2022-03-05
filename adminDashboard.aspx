@@ -4,19 +4,22 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="nav" runat="server">
     <ul class="menu">
-                <li class="menu__item">
-                    <a class="menu__link is-active" href="#">Admin Dashboard</a>
-                </li>
         <li class="menu__item">
-                    <a class="menu__link" href="#users">User Settings</a>
-                </li>
+            <a class="menu__link is-active" href="#">Admin Dashboard</a>
+        </li>
         <li class="menu__item">
-                    <a class="menu__link" href="#courses">Courses Settings</a>
-                </li>
+            <a class="menu__link" href="userDashboard.aspx">User Settings</a>
+        </li>
         <li class="menu__item">
-                    <a class="menu__link" href="#feedbacks">Feedbacks</a>
-                </li>
-            </ul>
+            <a class="menu__link" href="courseDashboard.aspx">Courses Settings</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="feedBackDashboard.aspx">Feedbacks</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="studentCourse.aspx">Students Information</a>
+        </li>
+    </ul>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
@@ -30,10 +33,11 @@
                 <h1>Users</h1>
             </div>
             <div class="card__content">
+               
                 <div class="card__item">
-                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="GridView1_RowCancelingEdit"
-                            OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" DataKeyNames="Id" 
-                 OnRowDeleting="OnRowDeleting" EmptyDataText="No records has been added." Width="1020px">  
+                    <asp:GridView ID="grdUsers" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="grdUsers_RowCancelingEdit"
+                            OnRowEditing="grdUsers_RowEditing" OnRowUpdating="grdUsers_RowUpdating" DataKeyNames="Id" 
+                 OnRowDeleting="grdUsers_RowDeleting" EmptyDataText="No records has been added." Width="1020px">  
             <Columns>  
                 <asp:TemplateField>  
                     <ItemTemplate>  
@@ -133,7 +137,7 @@
                         </tr>
                         <tr style="width: 150px; display: inline-block; text-align: center">
                             <td colspan="2" width="100%">
-                                <asp:Button ID="Button2" runat="server" Text="Add" OnClick="Insert2" BackColor="#66FF33" ForeColor="White" Width="250px" />
+                                <asp:Button ID="btnAddUser" runat="server" Text="Add" OnClick="btnAddUser_Click" BackColor="#66FF33" ForeColor="White" Width="250px" />
                             </td>
                         </tr>
                     </table>
@@ -179,10 +183,15 @@
                 <h1>Courses</h1>
             </div>
             <div class="card__content">
+                 <br />
+                <asp:Button ID="btnSortCourses" runat="server" Text="Sort Courses by Date (in Descending order)" OnClick="btnSortCourses_Click" />
+
+                <asp:Button ID="btnSortStartDate" runat="server" Text="Sort Courses by Start Date (in Descending order)" OnClick="btnSortStartDate_Click" />
+                <br />
                 <div class="card__item">
-                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="GridView2_RowCancelingEdit"
-                            OnRowEditing="GridView2_RowEditing" OnRowUpdating="GridView2_RowUpdating" DataKeyNames="Id" 
-                 OnRowDeleting="OnRowDeleting2" EmptyDataText="No records has been added." Width="1020px">  
+                    <asp:GridView ID="grdCourses" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="grdCourses_RowCancelingEdit"
+                            OnRowEditing="grdCourses_RowEditing" OnRowUpdating="grdCourses_RowUpdating" DataKeyNames="Id" 
+                 OnRowDeleting="grdCourses_RowDeleting" EmptyDataText="No records has been added." Width="1020px">  
             <Columns>  
                 <asp:TemplateField>  
                     <ItemTemplate>  
@@ -264,7 +273,7 @@
                         </tr>
                         <tr style="width: 150px; display: inline-block; text-align: center">
                             <td colspan="2" width="100%">
-                                <asp:Button ID="Button1" runat="server" Text="Add" OnClick="Insert2" BackColor="#66FF33" ForeColor="White" Width="250px" />
+                                <asp:Button ID="btnAddCourse" runat="server" Text="Create" OnClick="btnAddCourse_Click" BackColor="#66FF33" ForeColor="White" Width="250px" />
                             </td>
                         </tr>
                     </table>
@@ -303,8 +312,8 @@
             </div>
             <div class="card__content">
                 <div class="card__item">
-                    <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" CellPadding="6" DataKeyNames="Id" 
-                 OnRowDeleting="OnRowDeleting3" EmptyDataText="No records has been added." Width="1020px">  
+                    <asp:GridView ID="grdFeedback" runat="server" AutoGenerateColumns="False" CellPadding="6" DataKeyNames="Id" 
+                 OnRowDeleting="grdFeedback_RowDeleting" EmptyDataText="No records has been added." Width="1020px">  
             <Columns>  
                 <asp:TemplateField>  
                     <ItemTemplate>  
@@ -314,7 +323,7 @@
                 
                 <asp:TemplateField HeaderText="ID">  
                     <ItemTemplate>  
-                        <asp:Label ID="lbl_ID" runat="server" Text='<%#Eval("ID") %>'></asp:Label>  
+                        <asp:Label ID="lbl_ID" runat="server" Text='<%#Eval("Id") %>'></asp:Label>  
                     </ItemTemplate>  
                 </asp:TemplateField>  
                 <asp:TemplateField HeaderText="Name">  
@@ -347,6 +356,36 @@
             <RowStyle BackColor="#e7ceb6"/>  
         </asp:GridView> 
           
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dashboard__item"  id="students">
+        <div class="card">
+            <div class="card__header" style="color:white;background-color:red;">
+                <h1>Students Information</h1>
+            </div>
+            <div class="card__content">
+                <div class="card__item">
+                    <table border="0" cellpadding="2" cellspacing="3" style="border-collapse: collapse" width="1020px">
+                        <tr>
+                            <th Width="50%"  style="background-color:#FF0000; color:white">User Name</th>
+                            <th Width="50%"   style="background-color:#FF0000; color:white">Course Name</th>
+                        </tr>
+                    </table>
+                    <asp:Repeater ID="Repeater1" runat="server">  
+                <ItemTemplate>  
+                    <table border="0" cellpadding="2" cellspacing="3" style="border-collapse: collapse; text-align:center" width="1020px">
+                        
+                        <tr>
+                            <td Width="50%"><%#Eval("username")%></td>
+                            <td Width="50%" ><%#Eval("coursename")%></td>
+                        </tr>
+                    </table>
+                </ItemTemplate>  
+            </asp:Repeater>
                 </div>
             </div>
         </div>

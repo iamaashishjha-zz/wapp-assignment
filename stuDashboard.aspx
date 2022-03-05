@@ -48,7 +48,7 @@
                         </tr>
                         <tr style="width: 150px;display:inline-block; text-align:center">
                            <td colspan="2"  Width="100%" >
-                                <asp:Button ID="Button2" runat="server" Text="Update" OnClick="Insert3" BackColor="#66FF33" ForeColor="White" Width="250px" />
+                                <asp:Button ID="btnUpdateInfo" runat="server" Text="Update" OnClick="btnUpdateInfo_Click" BackColor="#66FF33" ForeColor="White" Width="250px" />
                             </td>
                         </tr>
                     </table>

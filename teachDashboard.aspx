@@ -5,18 +5,16 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="nav" runat="server">
     <ul class="menu">
-                <li class="menu__item">
-                    <a class="menu__link is-active" href="#">Teacher Dashboard</a>
-                </li>
         <li class="menu__item">
-                    <a class="menu__link" href="#courses">Courses Setting</a>
-                </li>
+            <a class="menu__link is-active" href="#">Admin Dashboard</a>
+        </li>
         <li class="menu__item">
-                    <a class="menu__link" href="#info">Update Information</a>
-                </li>
-        
-        
-            </ul>
+            <a class="menu__link" href="courseDashboard.aspx">Courses Settings</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="#info">Update Information</a>
+        </li>
+    </ul>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -28,11 +26,14 @@
             </div>
             <div class="card__content">
                 <br />
-                <asp:Button ID="btnSortCourses" runat="server" Text="Sort Courses by Date (in Ascending order)" OnClick="btnSortCourses_Click" />
+                <asp:Button ID="btnSortCourses" runat="server" Text="Sort Courses by Date (in Descending order)" OnClick="btnSortCourses_Click" />
+
+                <asp:Button ID="btnSortStartDate" runat="server" Text="Sort Courses by Start Date (in Descending order)" OnClick="btnSortStartDate_Click" />
+                <br />
                 <div class="card__item">
-                    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="GridView2_RowCancelingEdit"
-                        OnRowEditing="GridView2_RowEditing" OnRowUpdating="GridView2_RowUpdating" DataKeyNames="Id"
-                        OnRowDeleting="OnRowDeleting2" EmptyDataText="No records has been added." Width="1020px">
+                    <asp:GridView ID="grdCourses" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="grdCourses_RowCancelingEdit"
+                        OnRowEditing="grdCourses_RowEditing" OnRowUpdating="grdCourses_RowUpdating" DataKeyNames="Id"
+                        OnRowDeleting="grdCourses_RowDeleting" EmptyDataText="No records has been added." Width="1020px">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>
@@ -74,7 +75,7 @@
                                     <asp:Label ID="lbl_start_date" runat="server" Text='<%#Eval("start_date") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtStartDate" runat="server" Text='<%#Eval("start_date") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtStartDate" TextMode="Date" runat="server" Text='<%#Eval("start_date") %>'></asp:TextBox>
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="End Date">
@@ -82,16 +83,27 @@
                                     <asp:Label ID="lbl_end_date" runat="server" Text='<%#Eval("end_date") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtEndDate" runat="server" Text='<%#Eval("end_date") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtEndDate" TextMode="Date" runat="server" Text='<%#Eval("end_date") %>'></asp:TextBox>
                                 </EditItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Created By">
+                                <ItemTemplate>
+                                    <asp:Label ID="lbl_user" runat="server" Text='<%#Eval("username") %>'></asp:Label>
+                                </ItemTemplate>
+                                </asp:TemplateField>
                             <asp:TemplateField HeaderText="Category">
                                 <ItemTemplate>
                                     <asp:Label ID="lbl_category" runat="server" Text='<%#Eval("category") %>'></asp:Label>
                                 </ItemTemplate>
-                                <%--<EditItemTemplate>
-                                    <asp:TextBox ID="txtcategory" runat="server" Text='<%#Eval("end_date") %>'></asp:TextBox>
-                                </EditItemTemplate>--%>
+                                <EditItemTemplate>
+                                     <asp:DropDownList ID="slctSubRole1" CssClass="select-dropdown" runat="server" Width="100%">
+                                    <asp:ListItem Value="0" disabled>Select One</asp:ListItem>
+                                    <asp:ListItem Text="Network" Value="Network" />
+                                    <asp:ListItem Text="Programming" Value="Programming" />
+                                    <asp:ListItem Text="Designing" Value="Programming" />
+                                    <asp:ListItem Text="Arts and Humanities" Value="Arts" />
+                                </asp:DropDownList>
+                                </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Created At">
                                 <ItemTemplate>
@@ -117,11 +129,11 @@
                         </tr>
                         <tr>
                             <td Width="50%" >Start Date :</td>
-                            <td Width="50%" ><asp:TextBox ID="txtStartDate" runat="server" Width="100%" /></td>
+                            <td Width="50%" ><asp:TextBox ID="txtStartDate" TextMode="Date" runat="server" Width="100%" /></td>
                         </tr>
                         <tr>
                             <td Width="50%" >End Date :</td>
-                            <td Width="50%" ><asp:TextBox ID="txtEndDate" runat="server" Width="100%" /></td>
+                            <td Width="50%" ><asp:TextBox ID="txtEndDate" TextMode="Date" runat="server" Width="100%" /></td>
                         </tr>
                         <tr>
                             <td width="50%">Category:</td>
@@ -136,7 +148,7 @@
                         </tr>
                         <tr style="width: 150px;display:inline-block; text-align:center">
                            <td colspan="2"  Width="100%" >
-                                <asp:Button ID="Button1" runat="server" Text="Add" OnClick="Insert2" BackColor="#66FF33" ForeColor="White" Width="250px" />
+                                <asp:Button ID="btnAddCourse" runat="server" Text="Create" OnClick="btnAddCourse_Click" BackColor="#66FF33" ForeColor="White" Width="250px" />
                             </td>
                         </tr>
                     </table>
@@ -172,12 +184,45 @@
                         </tr>
                         <tr style="width: 150px;display:inline-block; text-align:center">
                            <td colspan="2"  Width="100%" >
-                                <asp:Button ID="Button2" runat="server" Text="Update" OnClick="Insert3" BackColor="#66FF33" ForeColor="White" Width="250px" />
+                                <asp:Button ID="btnUpdateInfo" runat="server" Text="Update" OnClick="btnUpdateInfo_Click" BackColor="#66FF33" ForeColor="White" Width="250px" />
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <div class="dashboard__item"  id="info">
+        <div class="card">
+            <div class="card__header" style="color:white;background-color:red;">
+                <h1>Students Information</h1>
+            </div>
+            <%--<div class="card__content">
+                <div class="card__item">
+                    <asp:Repeater ID="Repeater1" runat="server">  
+                <ItemTemplate>  
+                    <table border="0" cellpadding="2" cellspacing="3" style="border-collapse: collapse" width="1020px">
+                        <tr>
+                            <th Width="50%">Course Name:</th>
+                            <th Width="50%" ><%#Eval("Position")%></th>
+                        </tr>
+                        <tr>
+                            <td Width="50%"><%#Eval("Position")%></td>
+                            <td Width="50%" ><%#Eval("Position")%></td>
+                        </tr>
+                     
+                        <tr style="width: 150px;display:inline-block; text-align:center">
+                           <td colspan="2"  Width="100%" >
+                                <asp:Button ID="Button3" runat="server" Text="Update" OnClick="Insert3" BackColor="#66FF33" ForeColor="White" Width="250px" />
+                            </td>
+                        </tr>
+                    </table>
+                </ItemTemplate>  
+            </asp:Repeater>
+                </div>
+            </div>
+        </div>--%>
     </div>
 </asp:Content>

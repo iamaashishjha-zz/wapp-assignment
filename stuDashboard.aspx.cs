@@ -23,7 +23,6 @@ namespace wapp
                 string user_id = Session["user_id"].ToString();
                 if (!IsPostBack)
                 {
-                    //ShowData2();
                     string emailcheckquery = "select * from tblUsers where id='" + user_id + "'";
                     SqlCommand emailcheckcmd = new SqlCommand(emailcheckquery, con);
                     con.Open();
@@ -50,7 +49,7 @@ namespace wapp
             }
         }
 
-        protected void Insert3(object sender, EventArgs e)
+        protected void btnUpdateInfo_Click(object sender, EventArgs e)
         {
 
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());

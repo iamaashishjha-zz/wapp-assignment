@@ -24,13 +24,22 @@ namespace wapp
         protected global::System.Web.UI.WebControls.Button btnSortCourses;
 
         /// <summary>
-        /// GridView2 control.
+        /// btnSortStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.Button btnSortStartDate;
+
+        /// <summary>
+        /// grdCourses control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdCourses;
 
         /// <summary>
         /// txtCName control.
@@ -78,13 +87,13 @@ namespace wapp
         protected global::System.Web.UI.WebControls.DropDownList slctSubRole1;
 
         /// <summary>
-        /// Button1 control.
+        /// btnAddCourse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnAddCourse;
 
         /// <summary>
         /// txtTName control.
@@ -123,12 +132,12 @@ namespace wapp
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
 
         /// <summary>
-        /// Button2 control.
+        /// btnUpdateInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnUpdateInfo;
     }
 }

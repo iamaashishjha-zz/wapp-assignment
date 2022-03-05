@@ -26,6 +26,33 @@ namespace wapp
             Response.Redirect("~/index.aspx");
         }
 
+        protected void btnDashboard_Click(object sender, EventArgs e)
+        {
+            if((Session["user_role"].ToString() == "Admin") && (Session["user_sub_role"].ToString() == "Admin"))
+            {
+                Response.Redirect("~/adminDashboard.aspx");
+            }
+
+            else if(Session["user_role"].ToString() == "User") {
+                if(Session["user_sub_role"].ToString() == "Teacher")
+                {
+                    Response.Redirect("~/teachDashboard.aspx");
+
+                } else if (Session["user_sub_role"].ToString() == "Student")
+                {
+                    Response.Redirect("~/stuDashboard.aspx");
+                }
+                else
+                {
+                    Response.Redirect("~/home.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/home.aspx");
+            }
+        }
+
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/stuDashboard.aspx");
