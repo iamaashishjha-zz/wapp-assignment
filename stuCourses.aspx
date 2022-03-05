@@ -1,12 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/dashboard.Master" AutoEventWireup="true" CodeBehind="teachDashboard.aspx.cs" Inherits="wapp.teachDashboard" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/dashboard.Master" AutoEventWireup="true" CodeBehind="stuCourses.aspx.cs" Inherits="wapp.stuCourses" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
-    Teachers Dashboard
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="nav" runat="server">
-      <ul class="menu">
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="nav" runat="server">
+    <ul class="menu">
     <% if (Session["user_sub_role"].ToString() == "Teacher")
-          
             { %>
         <li class="menu__item">
             <a class="menu__link is-active" href="#">Teacher Dashboard</a>
@@ -15,7 +14,7 @@
             <a class="menu__link" href="teachDashboard.aspx">Update Information</a>
         </li>
         <li class="menu__item">
-            <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
+            <a class="menu__link" href="courseDashboard.aspx">Course</a>
         </li>
           <li class="menu__item">
             <a class="menu__link" href="teachStudent.aspx">Teacher Dashboard</a>
@@ -24,10 +23,13 @@
         <% if (Session["user_sub_role"].ToString() == "Student")
             { %>
         <li class="menu__item">
-            <a class="menu__link is-active" href="#">Student Dashboard</a>
+            <a class="menu__link" href="#">Student Dashboard</a>
         </li>
         <li class="menu__item">
             <a class="menu__link" href="stuDashboard.aspx">Update Information</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link is_active" href="stuCourses.aspx">My Courses</a>
         </li>
         <% } %>
         <% if (Session["user_role"].ToString() == "Admin")
@@ -48,42 +50,34 @@
             <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
         </li>
         <% } %>
-        
     </ul>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="body" runat="server">
-    <div class="dashboard__item"  id="info">
+<asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
+     <div class="dashboard__item"  id="students">
         <div class="card">
             <div class="card__header" style="color:white;background-color:red;">
-                <h1>Update Your Information</h1>
+                <h1>Students Information</h1>
             </div>
             <div class="card__content">
                 <div class="card__item">
                     <table border="0" cellpadding="2" cellspacing="3" style="border-collapse: collapse" width="1020px">
                         <tr>
-                            <td Width="50%" >Name:</td>
-                            <td Width="50%" ><asp:TextBox ID="txtTName" runat="server"  Width="100%" /></td>
-                        </tr>
-                        <tr>
-                            <td Width="50%" >Email :</td>
-                            <td Width="50%" ><asp:TextBox ID="txtEmail" runat="server" Width="100%" /></td>
-                        </tr>
-                        <tr>
-                            <td Width="50%" >Address :</td>
-                            <td Width="50%" ><asp:TextBox ID="txtAddress" runat="server" Width="100%" /></td>
-                        </tr>
-                        <tr>
-                            <td Width="50%" >Password :</td>
-                            <td Width="50%" ><asp:TextBox ID="txtPassword" TextMode="Password" runat="server" Width="100%" /></td>
-                        </tr>
-                        <tr style="width: 150px;display:inline-block; text-align:center">
-                           <td colspan="2"  Width="100%" >
-                                <asp:Button ID="btnUpdateInfo" runat="server" Text="Update" OnClick="btnUpdateInfo_Click" BackColor="#66FF33" ForeColor="White" Width="250px" />
-                            </td>
+                            <th Width="50%"   style="background-color:#FF0000; color:white">Course Name</th>
                         </tr>
                     </table>
+                    <asp:Repeater ID="Repeater1" runat="server">  
+                <ItemTemplate>  
+                    <asp:Label ID="lblCourseId" runat="server" Visible="false" Text='<%# Eval("courseId") %>'></asp:Label>
+                    <table border="0" cellpadding="2" cellspacing="3" style="border-collapse: collapse; text-align:center" width="1020px">
+                        <tr>
+                            <td Width="50%" ><%#Eval("coursename")%></td>
+                        </tr>
+                        <tr>
+                            <asp:Button ID="btnRemoveCourse" runat="server" Text="Delete Course" OnClick="btnRemoveCourse_Click"/>
+                        </tr>
+                    </table>
+                </ItemTemplate>  
+            </asp:Repeater>
                 </div>
             </div>
         </div>

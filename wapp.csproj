@@ -88,10 +88,13 @@
     <Content Include="about.aspx" />
     <Content Include="adminDashboard.aspx" />
     <Content Include="contact.aspx" />
+    <Content Include="course.aspx" />
     <Content Include="courseDashboard.aspx" />
-    <Content Include="courses.aspx" />
     <Content Include="feedbackDashboard.aspx" />
     <Content Include="home.aspx" />
+    <Content Include="Images\1-01.png" />
+    <Content Include="Images\1-02.png" />
+    <Content Include="Images\1-03.png" />
     <Content Include="Images\1.png" />
     <Content Include="Images\10.png" />
     <Content Include="Images\11.png" />
@@ -119,9 +122,11 @@
     <Content Include="Scripts\Coursesscript.js" />
     <Content Include="Shared\coursesStyles.css" />
     <Content Include="Shared\css.css" />
+    <Content Include="stuCourses.aspx" />
     <Content Include="stuDashboard.aspx" />
     <Content Include="studentCourse.aspx" />
     <Content Include="teachDashboard.aspx" />
+    <Content Include="teachStudent.aspx" />
     <Content Include="userDashboard.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -154,19 +159,19 @@
     <Compile Include="contact.aspx.designer.cs">
       <DependentUpon>contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="course.aspx.cs">
+      <DependentUpon>course.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="course.aspx.designer.cs">
+      <DependentUpon>course.aspx</DependentUpon>
+    </Compile>
     <Compile Include="courseDashboard.aspx.cs">
       <DependentUpon>courseDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="courseDashboard.aspx.designer.cs">
       <DependentUpon>courseDashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="courses.aspx.cs">
-      <DependentUpon>courses.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="courses.aspx.designer.cs">
-      <DependentUpon>courses.aspx</DependentUpon>
     </Compile>
     <Compile Include="dashboard.Master.cs">
       <DependentUpon>dashboard.Master</DependentUpon>
@@ -218,6 +223,13 @@
     <Compile Include="register-auth.aspx.designer.cs">
       <DependentUpon>register-auth.aspx</DependentUpon>
     </Compile>
+    <Compile Include="stuCourses.aspx.cs">
+      <DependentUpon>stuCourses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="stuCourses.aspx.designer.cs">
+      <DependentUpon>stuCourses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="stuDashboard.aspx.cs">
       <DependentUpon>stuDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -239,6 +251,13 @@
     <Compile Include="teachDashboard.aspx.designer.cs">
       <DependentUpon>teachDashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="teachStudent.aspx.cs">
+      <DependentUpon>teachStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teachStudent.aspx.designer.cs">
+      <DependentUpon>teachStudent.aspx</DependentUpon>
+    </Compile>
     <Compile Include="userDashboard.aspx.cs">
       <DependentUpon>userDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -257,7 +276,10 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Images\Courses\" />
+    <Folder Include="Images\Notes\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

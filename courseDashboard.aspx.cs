@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,7 +38,7 @@ namespace wapp
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
-            string query = "Select course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id; ";
+            string query = "Select course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,course.image as image,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id; ";
 
             adapt = new SqlDataAdapter(query, con);
             adapt.Fill(dt2);
@@ -99,30 +101,58 @@ namespace wapp
             dt2 = new DataTable();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
-            string cname = txtCName.Text;
-            string description = txtDescription.Text;
-            string start_date = txtStartDate.Text;
-            string end_date = txtEndDate.Text;
-            string category = slctSubRole1.SelectedValue;
-            DateTime date = DateTime.Now;
+            Page.Validate("stuValidation");
+            if (Page.IsValid)
+            {
+                if (imgCourse.HasFile)
+                {
+                    string cname = txtCName.Text;
+                    string description = txtDescription.Text;
+                    string start_date = txtStartDate.Text;
+                    string end_date = txtEndDate.Text;
+                    string category = slctSubRole1.SelectedValue;
+                    DateTime date = DateTime.Now;
+                    string str = imgCourse.FileName;
+                    imgCourse.PostedFile.SaveAs(Server.MapPath("~/Images/Courses/" + str));
+                    string imgUpload = "~/Images/Courses/" + str.ToString();
+                    //imgCourse.SaveAs(@"Images/Course/" + imgCourse.FileName);
+                    //string imgUpload = "Images/Course/" + imgCourse.FileName;
+                    //string startupPath = Environment.CurrentDirectory;
+                    //imgCourse.SaveAs(Request.PhysicalApplicationPath + "/Images/Course/" + imgCourse.FileName.ToString());
+                    //string imgUpload = "Images/Course/" + imgCourse.FileName.ToString();
+                    //HttpPostedFile image = imgCourse.PostedFile;
+                    //var bareFilename = Path.GetFileNameWithoutExtension(imgCourse.FileName);
+                    //var fileExt = Path.GetExtension(imgCourse.FileName);
+                    //var path = Path.Combine(Server.MapPath("~/Images/Course/" + bareFilename + "." + fileExt));
+                    //var path = Server.MapPath("~/Images/Course/" + bareFilename + "." + fileExt);
 
-            int user_id = (int)Session["user_id"];
+                    //var dir = Directory.CreateDirectory(path);
+                    //imgCourse.SaveAs(Path.Combine(path, bareFilename));
 
-            string query = "INSERT INTO tblCourses VALUES(@name, @description, @start_date, @end_date, @user_id, @created_at, @category)";
-            SqlCommand cmd = new SqlCommand(query);
-            cmd.Parameters.AddWithValue("@name", cname);
-            cmd.Parameters.AddWithValue("@description", description);
-            cmd.Parameters.AddWithValue("@start_date", start_date);
-            cmd.Parameters.AddWithValue("@end_date", end_date);
-            cmd.Parameters.AddWithValue("@user_id", user_id);
-            cmd.Parameters.AddWithValue("@created_at", date.ToString());
-            cmd.Parameters.AddWithValue("@category", category);
-            cmd.Connection = con;
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
 
-            txtCName.Text = null;
+
+
+                    int user_id = (int)Session["user_id"];
+
+                    string query = "INSERT INTO tblCourses VALUES(@name, @description, @start_date, @end_date, @user_id, @created_at, @category, @image)";
+                    SqlCommand cmd = new SqlCommand(query);
+                    cmd.Parameters.AddWithValue("@name", cname);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@start_date", start_date);
+                    cmd.Parameters.AddWithValue("@end_date", end_date);
+                    cmd.Parameters.AddWithValue("@user_id", user_id);
+                    cmd.Parameters.AddWithValue("@created_at", date.ToString());
+                    cmd.Parameters.AddWithValue("@category", category);
+                    cmd.Parameters.AddWithValue("@image", imgUpload);
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                }
+            }
+
+                txtCName.Text = null;
             txtDescription.Text = null;
             txtStartDate.Text = null;
             txtEndDate.Text = null;

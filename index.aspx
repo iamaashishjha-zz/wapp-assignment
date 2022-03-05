@@ -3,79 +3,66 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <link href="Shared/coursesStyles.css" rel="stylesheet" />
+    <style>
+        
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="nav" runat="server">
     <li><a href="login-auth.aspx">Login</a></li>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
+<div class="slideshow-container">
 
-<h1>Our Recently Updated Courses</h1>
+            <div class="mySlides fade">
+                <img src="Images/1-01.png" style="width: 100%">
+                <div class="text"></div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="Images/1-02.png" style="width: 100%">
+                <div class="text"></div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="Images/1-03.png" style="width: 100%">
+                <div class="text"></div>
+            </div>
+
+        </div>
+        <br>
+
+        <div style="text-align: center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+<h1 style="margin-top:25px;">Our Recently Updated Courses</h1>
     <main>
         <div class="slide-container">
+            
         <img id="slide-left" class="arrow" src="images/arrow-left.png">
-    <section class="container" id="slider">
-        
-        <div class="thumbnail">
-            <img src="Images/1.png" alt="">
-            <div class="product-details">
-                <h2>Asp .Net</h2>
-                <p> <span>  </span> </p>
-                <a href="#">Enroll Now</a>
-            </div>
-        </div>
-        <div class="thumbnail">
-            <img src="Images/2.png" alt="">
-            <div class="product-details">
-                <h2>Demo Product</h2>
-                <p> <span>$39.99</span> $29.99</p>
-                <a href="#">Add to Cart</a>
-            </div>
-        </div>
-        <div class="thumbnail">
-            <img src="Images/3.png" alt="">
-            <div class="product-details">
-                <h2>Demo Product</h2>
-                <p> <span>$39.99</span> $29.99</p>
-                <a href="#">Add to Cart</a>
-            </div>
-        </div>
-        <div class="thumbnail">
-            <img src="Images/4.png" alt="">
-            <div class="product-details">
-                <h2>Demo Product</h2>
-                <p> <span>$39.99</span> $29.99</p>
-                <a href="#">Add to Cart</a>
-            </div>
-        </div>
-        <div class="thumbnail">
-            <img src="Images/5.png" alt="">
-            <div class="product-details">
-                <h2>Demo Product</h2>
-                <p> <span>$39.99</span> $29.99</p>
-                <a href="#">Add to Cart</a>
-            </div>
-        </div>
-        <div class="thumbnail">
-            <img src="Images/6.png" alt="">
-            <div class="product-details">
-                <h2>Demo Product</h2>
-                <p> <span>$39.99</span> $29.99</p>
-                <a href="#">Add to Cart</a>
-            </div>
-        </div>
-        <div class="thumbnail">
-            <img src="Images/7.png" alt="">
-            <div class="product-details">
-                <h2>Demo Product</h2>
-                <p> <span>$39.99</span> $29.99</p>
-                <a href="#">Add to Cart</a>
-            </div>
-        </div>
-        
-    </section>
+            <section class="container" id="slider" style="text-align:center">
+                <asp:Repeater ID="Repeater1" runat="server">  
+                <ItemTemplate>  
+                     <div class="thumbnail">
+                    <img src="Images/2.png" alt="">
+                    <div class="product-details">
+                        <h2><%#Eval("name")%></h2>
+                        <p>Start Date : <span><%#Eval("start_date")%></span</p>
+                        <p>End Date :<span><%#Eval("start_date")%></span</p>
+                        <p>Category :<span><%#Eval("category")%></span></p>
+                        <p>Create By :<span> <%#Eval("username")%></span></p>
+                        <a href="course.aspx">Learn More</a>
+                    </div>
+                </div>
+                </ItemTemplate>  
+            </asp:Repeater>  
+               
+            </section>
+            
     <img id="slide-right" class="arrow" src="images/arrow-right.png">
-</div>
-</main>
+        </div>
+    </main>
     
 
     <div class="container">
@@ -150,5 +137,6 @@
     
         </div>
     </div>
+
     
 </asp:Content>

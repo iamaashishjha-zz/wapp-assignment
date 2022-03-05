@@ -117,6 +117,12 @@
                         <asp:TextBox ID="txtEndDate" TextMode="Date" runat="server" Text='<%#Eval("end_date") %>'></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="End Date">
+                    <ItemTemplate>
+                        <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# Eval("Image") %>'/>
+                    </ItemTemplate>
+                    
+                </asp:TemplateField>
                  <asp:TemplateField HeaderText="Category">
                                 <ItemTemplate>
                                     <asp:Label ID="lbl_category" runat="server" Text='<%#Eval("category") %>'></asp:Label>
@@ -176,6 +182,17 @@
                                     <asp:ListItem Text="Designing" Value="Programming" />
                                     <asp:ListItem Text="Arts and Humanities" Value="Arts" />
                                 </asp:DropDownList>
+                        </tr>
+                        <tr>
+                            <td width="50%">Category:</td>
+                            <td width="50%">
+                                <asp:FileUpload id="imgCourse" runat="server" />
+                                <%--<asp:RegularExpressionValidator   
+id="FileUpLoadValidator" runat="server"   
+ErrorMessage="Upload Jpegs and Gifs only."   
+ValidationExpression="^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))(.jpg|.JPG|.png|.PNG|.gif|.GIF)$"   
+ControlToValidate="imgCourse">  
+</asp:RegularExpressionValidator> --%>
                         </tr>
                         <tr style="width: 150px; display: inline-block; text-align: center">
                             <td colspan="2" width="100%">

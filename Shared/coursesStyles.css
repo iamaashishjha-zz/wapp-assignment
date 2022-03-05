@@ -61,7 +61,7 @@ h1 {
 main {
 
     background-color: #f4f4f4;
-    padding: 4rem 0;
+    /*padding: 4rem 0;*/
     
 }
 
@@ -136,16 +136,21 @@ section .thumbnail:hover {
 
 .product-details p {
     font-size: 1rem;
-    padding-bottom: 1rem;
     color: green;
     font-weight: 700;
 }
 
-.product-details p span {
+    .product-details p span{
+        font-size: 1rem;
+        color: green;
+        font-weight: 700;
+    }
+
+/*.product-details p span {
     text-decoration: line-through;
     color: red;
     font-weight: normal;
-}
+}*/
 
 .product-details a {
     font-size: 1rem;

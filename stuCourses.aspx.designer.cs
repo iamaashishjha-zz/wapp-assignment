@@ -11,7 +11,7 @@ namespace wapp
 {
 
 
-    public partial class index2
+    public partial class stuCourses
     {
 
         /// <summary>
