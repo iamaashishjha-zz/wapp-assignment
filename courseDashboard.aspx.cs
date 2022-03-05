@@ -103,17 +103,20 @@ namespace wapp
             string description = txtDescription.Text;
             string start_date = txtStartDate.Text;
             string end_date = txtEndDate.Text;
+            string category = slctSubRole1.SelectedValue;
+            DateTime date = DateTime.Now;
 
-            //string user_id = Session["user_id"].ToString();
-            int user_id = 1;
+            int user_id = (int)Session["user_id"];
 
-            string query = "INSERT INTO tblCourses VALUES(@name, @description, @start_date, @end_date, @user_id)";
+            string query = "INSERT INTO tblCourses VALUES(@name, @description, @start_date, @end_date, @user_id, @created_at, @category)";
             SqlCommand cmd = new SqlCommand(query);
             cmd.Parameters.AddWithValue("@name", cname);
             cmd.Parameters.AddWithValue("@description", description);
             cmd.Parameters.AddWithValue("@start_date", start_date);
             cmd.Parameters.AddWithValue("@end_date", end_date);
             cmd.Parameters.AddWithValue("@user_id", user_id);
+            cmd.Parameters.AddWithValue("@created_at", date.ToString());
+            cmd.Parameters.AddWithValue("@category", category);
             cmd.Connection = con;
             con.Open();
             cmd.ExecuteNonQuery();

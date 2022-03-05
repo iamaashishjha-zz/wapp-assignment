@@ -5,21 +5,60 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="nav" runat="server">
     <ul class="menu">
-                <li class="menu__item">
-                    <a class="menu__link is-active" href="#">Student Dashboard</a>
-                </li>
+                <% if (Session["user_sub_role"].ToString() == "Teacher")
+            { %>
         <li class="menu__item">
-                    <a class="menu__link" href="#users">Update Information</a>
-                </li>
+            <a class="menu__link is-active" href="#">Teacher Dashboard</a>
+        </li>
         <li class="menu__item">
-                    <a class="menu__link" href="#courses">Courses Settings</a>
-                </li>
+            <a class="menu__link" href="teachDashboard.aspx">Update Information</a>
+        </li>
         <li class="menu__item">
-                    <a class="menu__link" href="#feedbacks">Feedbacks</a>
-                </li>
-            </ul>
+            <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
+        </li>
+        <% } %>
+        <% if (Session["user_sub_role"].ToString() == "Student")
+            { %>
+        <li class="menu__item">
+            <a class="menu__link is-active" href="#">Student Dashboard</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="stuDashboard.aspx">Update Information</a>
+        </li>
+        <% } %>
+        <% if (Session["user_role"].ToString() == "Admin")
+            { %>
+        <li class="menu__item">
+            <a class="menu__link" href="#">Admin Dashboard</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="feedBackDashboard.aspx">Feedbacks</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="studentCourse.aspx">Students Information</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="userDashboard.aspx">User Settings</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
+        </li>
+        <% } %>
+        
+    </ul>
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+            border-collapse: collapse;
+            border-style: solid;
+            border-width: 1px;
+        }
+        .auto-style2 {
+            height: 32px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div class="dashboard__item" id="users">
@@ -39,8 +78,8 @@
                             <td Width="50%" ><asp:TextBox ID="txtEmail" runat="server" Width="100%" /></td>
                         </tr>
                         <tr>
-                            <td Width="50%" >Address :</td>
-                            <td Width="50%" ><asp:TextBox ID="txtAddress" runat="server" Width="100%" /></td>
+                            <td Width="50%" class="auto-style2" >Address :</td>
+                            <td Width="50%" class="auto-style2" ><asp:TextBox ID="txtAddress" runat="server" Width="100%" /></td>
                         </tr>
                         <tr>
                             <td Width="50%" >Password :</td>
@@ -48,7 +87,30 @@
                         </tr>
                         <tr style="width: 150px;display:inline-block; text-align:center">
                            <td colspan="2"  Width="100%" >
-                                <asp:Button ID="btnUpdateInfo" runat="server" Text="Update" OnClick="btnUpdateInfo_Click" BackColor="#66FF33" ForeColor="White" Width="250px" />
+                                <asp:Button ID="btnUpdateInfo" runat="server" Text="Update" OnClick="btnUpdateInfo_Click" BackColor="#66FF33" ForeColor="White" Width="250px" ValidationGroup="stuValidation" />
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table cellpadding="2" class="auto-style1">
+                        <tr>
+                            <td>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtTName" Display="Dynamic" ErrorMessage="Name is required" ForeColor="Red" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ErrorMessage="Email is Required" ForeColor="Red" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtAddress" Display="Dynamic" ErrorMessage="Address Is Required" ForeColor="Red" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtPassword" Display="Dynamic" ErrorMessage="Password is required" ForeColor="Red" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
                             </td>
                         </tr>
                     </table>

@@ -51,27 +51,31 @@ namespace wapp
 
         protected void btnUpdateInfo_Click(object sender, EventArgs e)
         {
+            Page.Validate("stuValidation");
+            if (Page.IsValid)
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+                string ssname = txtTName.Text;
+                string ssemail = txtEmail.Text;
+                string ssaddress = txtAddress.Text;
+                string sspassword = txtPassword.Text;
+                int ssuser_id = (int)Session["user_id"];
 
-            string ssname = txtTName.Text;
-            string ssemail = txtEmail.Text;
-            string ssaddress = txtAddress.Text;
-            string sspassword = txtPassword.Text;
-            int ssuser_id = (int)Session["user_id"];
+                SqlCommand cmd = new SqlCommand("Update tblUsers set name='" + ssname + "',email='" + ssemail + "',address='" + ssaddress + "',password='" + sspassword + "' where ID=" + ssuser_id, con);
+                con.Open();
 
-         
-            SqlCommand cmd = new SqlCommand("Update tblUsers set name='" + ssname + "',email='" + ssemail + "',address='" + ssaddress + "',password='" + sspassword + "' where ID=" + ssuser_id, con);
-            con.Open();
+                cmd.Connection = con;
+                cmd.ExecuteNonQuery();
+                con.Close();
 
-            cmd.Connection = con;
-            cmd.ExecuteNonQuery();
-            con.Close();
+                txtTName.Text = null;
+                txtEmail.Text = null;
+                txtAddress.Text = null;
+                txtPassword.Text = null;
+            }
 
-            txtTName.Text = null;
-            txtEmail.Text = null;
-            txtAddress.Text = null;
-            txtPassword.Text = null;
+            
         }
     }
 }

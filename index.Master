@@ -601,6 +601,7 @@ body {
             cancelBtn.classList.add("show");
         }
     </script>
+    <script src="Scripts/Coursesscript.js"></script>
 
 </body>
 </html>

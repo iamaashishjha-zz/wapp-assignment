@@ -92,11 +92,32 @@
     <Content Include="courses.aspx" />
     <Content Include="feedbackDashboard.aspx" />
     <Content Include="home.aspx" />
+    <Content Include="Images\1.png" />
+    <Content Include="Images\10.png" />
+    <Content Include="Images\11.png" />
+    <Content Include="Images\12.png" />
+    <Content Include="Images\2.png" />
+    <Content Include="Images\250.jpg" />
+    <Content Include="Images\3.png" />
+    <Content Include="Images\4.png" />
+    <Content Include="Images\5.png" />
+    <Content Include="Images\6.png" />
+    <Content Include="Images\7.png" />
+    <Content Include="Images\8.png" />
+    <Content Include="Images\9.png" />
+    <Content Include="Images\aashish.jpg" />
+    <Content Include="Images\arrow-left.png" />
+    <Content Include="Images\arrow-right.png" />
+    <Content Include="Images\Jasbir_sir.jpg" />
+    <Content Include="Images\kushal.jpg" />
+    <Content Include="Images\priyanka.jpg" />
     <Content Include="index.aspx" />
     <Content Include="login-auth.aspx" />
     <Content Include="register-auth.aspx" />
     <Content Include="auth.Master" />
     <Content Include="index.Master" />
+    <Content Include="Scripts\Coursesscript.js" />
+    <Content Include="Shared\coursesStyles.css" />
     <Content Include="Shared\css.css" />
     <Content Include="stuDashboard.aspx" />
     <Content Include="studentCourse.aspx" />
@@ -236,10 +257,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-    <Folder Include="Scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

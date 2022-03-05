@@ -4,14 +4,31 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="nav" runat="server">
     <ul class="menu">
+        <% if (Session["user_sub_role"].ToString() == "Teacher")
+            { %>
         <li class="menu__item">
-            <a class="menu__link is-active" href="#">Admin Dashboard</a>
+            <a class="menu__link is-active" href="#">Teacher Dashboard</a>
         </li>
         <li class="menu__item">
-            <a class="menu__link" href="userDashboard.aspx">User Settings</a>
+            <a class="menu__link" href="teachDashboard.aspx">Update Information</a>
         </li>
         <li class="menu__item">
-            <a class="menu__link" href="courseDashboard.aspx">Courses Settings</a>
+            <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
+        </li>
+        <% } %>
+        <% if (Session["user_sub_role"].ToString() == "Student")
+            { %>
+        <li class="menu__item">
+            <a class="menu__link is-active" href="#">Student Dashboard</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="stuDashboard.aspx">Update Information</a>
+        </li>
+        <% } %>
+        <% if (Session["user_role"].ToString() == "Admin")
+            { %>
+        <li class="menu__item">
+            <a class="menu__link" href="#">Admin Dashboard</a>
         </li>
         <li class="menu__item">
             <a class="menu__link" href="feedBackDashboard.aspx">Feedbacks</a>
@@ -19,6 +36,14 @@
         <li class="menu__item">
             <a class="menu__link" href="studentCourse.aspx">Students Information</a>
         </li>
+        <li class="menu__item">
+            <a class="menu__link" href="userDashboard.aspx">User Settings</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
+        </li>
+        <% } %>
+        
     </ul>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
