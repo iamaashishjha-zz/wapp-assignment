@@ -116,6 +116,8 @@
     <Content Include="Images\priyanka.jpg" />
     <Content Include="index.aspx" />
     <Content Include="login-auth.aspx" />
+    <Content Include="noteDashboard.aspx" />
+    <Content Include="notes.aspx" />
     <Content Include="register-auth.aspx" />
     <Content Include="auth.Master" />
     <Content Include="index.Master" />
@@ -214,6 +216,20 @@
     </Compile>
     <Compile Include="login-auth.aspx.designer.cs">
       <DependentUpon>login-auth.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="noteDashboard.aspx.cs">
+      <DependentUpon>noteDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="noteDashboard.aspx.designer.cs">
+      <DependentUpon>noteDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="notes.aspx.cs">
+      <DependentUpon>notes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="notes.aspx.designer.cs">
+      <DependentUpon>notes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="register-auth.aspx.cs">

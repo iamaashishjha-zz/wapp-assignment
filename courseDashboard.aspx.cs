@@ -115,19 +115,6 @@ namespace wapp
                     string str = imgCourse.FileName;
                     imgCourse.PostedFile.SaveAs(Server.MapPath("~/Images/Courses/" + str));
                     string imgUpload = "~/Images/Courses/" + str.ToString();
-                    //imgCourse.SaveAs(@"Images/Course/" + imgCourse.FileName);
-                    //string imgUpload = "Images/Course/" + imgCourse.FileName;
-                    //string startupPath = Environment.CurrentDirectory;
-                    //imgCourse.SaveAs(Request.PhysicalApplicationPath + "/Images/Course/" + imgCourse.FileName.ToString());
-                    //string imgUpload = "Images/Course/" + imgCourse.FileName.ToString();
-                    //HttpPostedFile image = imgCourse.PostedFile;
-                    //var bareFilename = Path.GetFileNameWithoutExtension(imgCourse.FileName);
-                    //var fileExt = Path.GetExtension(imgCourse.FileName);
-                    //var path = Path.Combine(Server.MapPath("~/Images/Course/" + bareFilename + "." + fileExt));
-                    //var path = Server.MapPath("~/Images/Course/" + bareFilename + "." + fileExt);
-
-                    //var dir = Directory.CreateDirectory(path);
-                    //imgCourse.SaveAs(Path.Combine(path, bareFilename));
 
 
 

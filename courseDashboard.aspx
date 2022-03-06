@@ -18,6 +18,12 @@
         <li class="menu__item">
             <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
         </li>
+        <li class="menu__item">
+            <a class="menu__link" href="noteDashboard.aspx">Notes</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="studentCourse.aspx">Notes</a>
+        </li>
         <% } %>
         <% if (Session["user_sub_role"].ToString() == "Student")
             { %>
@@ -26,6 +32,9 @@
         </li>
         <li class="menu__item">
             <a class="menu__link" href="stuDashboard.aspx">Update Information</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="stuCourses.aspx">View Courses</a>
         </li>
         <% } %>
         <% if (Session["user_role"].ToString() == "Admin")
@@ -37,13 +46,13 @@
             <a class="menu__link" href="feedBackDashboard.aspx">Feedbacks</a>
         </li>
         <li class="menu__item">
-            <a class="menu__link" href="studentCourse.aspx">Students Information</a>
-        </li>
-        <li class="menu__item">
             <a class="menu__link" href="userDashboard.aspx">User Settings</a>
         </li>
         <li class="menu__item">
             <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
+        </li>
+        <li class="menu__item">
+            <a class="menu__link" href="studentCourse.aspx">Students Information</a>
         </li>
         <% } %>
         
@@ -117,7 +126,7 @@
                         <asp:TextBox ID="txtEndDate" TextMode="Date" runat="server" Text='<%#Eval("end_date") %>'></asp:TextBox>
                     </EditItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="End Date">
+                <asp:TemplateField HeaderText="Image">
                     <ItemTemplate>
                         <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# Eval("Image") %>'/>
                     </ItemTemplate>
