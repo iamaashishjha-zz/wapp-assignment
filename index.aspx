@@ -45,7 +45,7 @@
                 <asp:Repeater ID="Repeater1" runat="server">  
                 <ItemTemplate>  
                      <div class="thumbnail">
-                    <img src="Images/2.png" alt="">
+                    <img src="<%#Eval("image")%>" alt="<%#Eval("description")%>">
                     <div class="product-details">
                         <h2><%#Eval("name")%></h2>
                         <p>Start Date : <span><%#Eval("start_date")%></span</p>

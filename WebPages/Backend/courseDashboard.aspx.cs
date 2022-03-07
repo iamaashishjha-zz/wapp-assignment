@@ -10,7 +10,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.UI.WebControls;
 
-namespace wapp
+namespace wapp.WebPages.Backend
 {
     public partial class courseDashboard : System.Web.UI.Page
     {

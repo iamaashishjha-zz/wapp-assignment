@@ -1,16 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/index.Master" AutoEventWireup="true" CodeBehind="home.aspx.cs" Inherits="wapp.home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebPages/Master/index.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="wapp.WebPages.Frontend.index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="title" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <link href="Shared/coursesStyles.css" rel="stylesheet" />
+    <style>
+        
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="nav" runat="server">
-    <li><asp:Button ID="btnDashboard" runat="server" Text="Dashboard"  CssClass="button" OnClick="btnDashboard_Click"/></li>
-    <li><asp:Button ID="btnLogout" runat="server" Text="Log Out" CssClass="button" OnClick="btnLogout_Click" /></li>
-    
+    <li><a href="login-auth.aspx">Login</a></li>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
-    <div class="slideshow-container">
+<div class="slideshow-container">
 
             <div class="mySlides fade">
                 <img src="Images/1-01.png" style="width: 100%">
@@ -35,12 +36,12 @@
             <span class="dot"></span>
             <span class="dot"></span>
         </div>
-    <h1 style="margin-top:25px;">Our Recently Updated Courses</h1>
+<h1 style="margin-top:25px;">Our Recently Updated Courses</h1>
     <main>
         <div class="slide-container">
             
         <img id="slide-left" class="arrow" src="images/arrow-left.png">
-            <section class="container" id="slider">
+            <section class="container" id="slider" style="text-align:center">
                 <asp:Repeater ID="Repeater1" runat="server">  
                 <ItemTemplate>  
                      <div class="thumbnail">
@@ -56,11 +57,14 @@
                 </div>
                 </ItemTemplate>  
             </asp:Repeater>  
+               
             </section>
             
     <img id="slide-right" class="arrow" src="images/arrow-right.png">
         </div>
     </main>
+    
+
     <div class="container">
             <div class="row mt-2 mb-2">
                 <h1 style="text-align:center;">Our Team</h1>
@@ -134,4 +138,5 @@
         </div>
     </div>
 
+    
 </asp:Content>

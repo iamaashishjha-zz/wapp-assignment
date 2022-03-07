@@ -3,40 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
-using System.Web.UI.WebControls;
 
-namespace wapp
+namespace wapp.WebPages.Frontend
 {
-    public partial class studentCourse : System.Web.UI.Page
+    public partial class notes : System.Web.UI.Page
     {
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
-            
-            if ((Session["user_id"] != null) && (Session["user_sub_role"].ToString() == "Teacher"))
+            if (Session["user_id"] != null)
             {
                 if (!IsPostBack)
                 {
-                    
                     BindRepeator();
                 }
+
             }
             else
             {
-                Response.Redirect("~/home.aspx");
+                Response.Redirect("~/login-auth.aspx");
+
             }
         }
 
         private void BindRepeator()
         {
             string CS = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
-            //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
             using (SqlConnection con = new SqlConnection(CS))
             {
-                SqlCommand cmd = new SqlCommand("getCourseStudentDetails", con);
+                
+                SqlCommand cmd = new SqlCommand("getCourseNotes", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
                 Repeater1.DataSource = cmd.ExecuteReader();

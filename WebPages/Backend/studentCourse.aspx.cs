@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Web.UI.WebControls;
 
-namespace wapp
+namespace wapp.WebPages.Backend
 {
     public partial class studentCourse : System.Web.UI.Page
     {
