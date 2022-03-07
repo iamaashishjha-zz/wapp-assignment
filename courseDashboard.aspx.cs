@@ -38,10 +38,7 @@ namespace wapp
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
-            string query = "Select course.id as id,course.name as name,course.description as" +
-                " description,course.start_date as start_date,course.end_date as end_date,course.user_id" +
-                " as user_id,course.category as category,course.created_at as created_at,course.image as" +
-                " image,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id; ";
+            string query = "Select course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,course.image as image,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id; ";
 
             adapt = new SqlDataAdapter(query, con);
             adapt.Fill(dt2);
@@ -156,7 +153,7 @@ namespace wapp
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
-            adapt = new SqlDataAdapter("Select course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id ORDER BY course.created_at DESC", con);
+            adapt = new SqlDataAdapter("Select course.image as image, course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id ORDER BY course.created_at DESC", con);
             adapt.Fill(dt2);
             if (dt2.Rows.Count > 0)
             {
@@ -172,7 +169,7 @@ namespace wapp
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
             con.Open();
-            adapt = new SqlDataAdapter("Select course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id ORDER BY course.start_date DESC", con);
+            adapt = new SqlDataAdapter("Select course.image as image, course.id as id,course.name as name,course.description as description,course.start_date as start_date,course.end_date as end_date,course.user_id as user_id,course.category as category,course.created_at as created_at,userdetail.name as username FROM tblCourses as course LEFT JOIN tblUsers as userdetail ON course.user_id = userdetail.id ORDER BY course.start_date DESC", con);
             adapt.Fill(dt2);
             if (dt2.Rows.Count > 0)
             {

@@ -4,12 +4,17 @@
 
 <html>
 <head runat="server">
-    <title><asp:ContentPlaceHolder ID="title" runat="server">
-    </asp:ContentPlaceHolder></title>
+    <title>
+
+        <asp:ContentPlaceHolder ID="title" runat="server">
+        </asp:ContentPlaceHolder>
+
+    </title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        
         .admin {
             --spacing: 1rem;
             display: flex;
@@ -36,7 +41,7 @@
         .admin__nav {
             flex: 0 0 300px;
             grid-area: nav;
-            background-color: #313541;
+            font-size: larger;
         }
 
         .admin__main {
@@ -166,20 +171,22 @@
         .menu__link {
             display: block;
             padding: 10px 30px;
-            color: #76808f;
+            color: black;
+            font-weight: bolder;
             text-decoration: none;
         }
 
             .menu__link.is-active {
-                color: #fff;
-                background-color: var(--bcn-orange-dark);
-                border-left: 3px solid var(--bcn-orange);
+                color: blue;
             }
 
-            .menu__link:hover, .menu__link:focus {
-                color: currentcolor;
-                background-color: var(--bcn-orange-light);
-            }
+        .menu__title {
+        }
+
+        .menu__link:hover, .menu__link:focus {
+            color: red;
+            /*background-color: var(--bcn-orange-light);*/
+        }
 
         .card {
             height: 100%;
@@ -199,7 +206,7 @@
             padding: 20px 30px;
         }
 
-        .btn {
+        .btn--admin {
             display: inline-block;
             border-radius: 5em;
             border: 0;
@@ -211,46 +218,108 @@
             color: #fff;
             background-color: #56bf89;
         }
+
+        .btn--danger {
+            color: #fff;
+            background-color: #56bf89;
+        }
+
+        .menu__title__header {
+            color: blue;
+            background-color: beige;
+            width: 100%;
+            display: inline-block;
+            padding: 10px 10px;
+            border-bottom: 4px green;
+            text-align: center;
+            font-size: larger;
+            font-weight: bolder;
+        }
+
+        .is-active {
+            background-color: wheat;
+        }
     </style>
-    <%--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">--%>
-    <%--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">--%>
 </head>
 <body>
     <form id="form1" runat="server">
         <div class="admin">
-        <header class="admin__header">
-            <div class="toolbar">
-                <div class="toolbar__left">
-                        <asp:Button ID="btnHome" runat="server" CssClass="btn btn--primary" Text="Home" OnClick="btnHome_Click" />
+            <header class="admin__header">
+                <div class="toolbar">
+                    <div class="toolbar__left">
+                        <asp:Button ID="btnHome" runat="server" CssClass="btn--admin btn--primary btn-block" Text="Home" OnClick="btnHome_Click" />
+                    </div>
+                    <div class="toolbar__right">
+                        <asp:Button ID="btnLogOut" runat="server" CssClass="btn--admin btn--danger btn-block logout" Text="Log Out" OnClick="btnLogOut_Click" />
+                    </div>
                 </div>
-                <div class="toolbar__right">
-                        <asp:Button ID="btnLogOut" runat="server" CssClass="btn btn--primary logout" Text="Log Out" OnClick="btnLogOut_Click" />
+            </header>
+            <nav class="admin__nav">
+                <asp:ContentPlaceHolder ID="nav" runat="server">
+                </asp:ContentPlaceHolder>
+                <ul class="menu">
+                    <% if (Session["user_sub_role"].ToString() == "Student")
+                        { %>
+                    <li class="menu__item">
+                        <a class="menu__title__header" href="#">Student Dashboard</a>
+                    </li>
+                    <li class="menu__item" id="updateStudentInfo" runat="server">
+                        <a class="menu__link" href="stuDashboard.aspx">Update Information</a>
+                    </li>
+                    <li class="menu__item" id="stuCourses" runat="server">
+                        <a class="menu__link" href="stuCourses.aspx">Course Enrollments</a>
+                    </li>
+                    <% } %>
+                    <% if (Session["user_sub_role"].ToString() == "Teacher")
+                        { %>
+                    <li class="menu__item">
+                        <a class="menu__title__header" href="#">Teacher Dashboard</a>
+                    </li>
+                    <li class="menu__item" id="updateTeachInfo" runat="server">
+                        <a class="menu__link" href="teachDashboard.aspx">Update Information</a>
+                    </li>
+                    <li class="menu__item" id="allCourses" runat="server">
+                        <a class="menu__link" href="courseDashboard.aspx">Course</a>
+                    </li>
+                    <li class="menu__item" id="teachIndCourses" runat="server">
+                        <a class="menu__link" href="teachStudent.aspx">Course Enrollments</a>
+                    </li>
+                    <% } %>
+                    
+                    <% if (Session["user_role"].ToString() == "Admin")
+                        { %>
+                    <li class="menu__item">
+                        <a class="menu__title__header" href="#">Admin Dashboard</a>
+                    </li>
+                    <li class="menu__item" id="adminFeedback" runat="server">
+                        <a class="menu__link" href="feedBackDashboard.aspx">Feedbacks</a>
+                    </li>
+                    <li class="menu__item" id="adminUser" runat="server">
+                        <a class="menu__link" href="userDashboard.aspx">Users</a>
+                    </li>
+                    <li class="menu__item" id="adminAllCourses" runat="server">
+                        <a class="menu__link" href="courseDashboard.aspx">Course</a>
+                    </li>
+                    <li class="menu__item" id="adminStudents" runat="server">
+                        <a class="menu__link" href="studentCourse.aspx">Course Enrollments</a>
+                    </li>
+                    <% } %>
+                </ul>
+            </nav>
+            <main class="admin__main">
+                <div class="dashboard">
+                    <asp:ContentPlaceHolder ID="body" runat="server">
+                    </asp:ContentPlaceHolder>
                 </div>
-            </div>
-        </header>
-        <nav class="admin__nav">
-            <asp:ContentPlaceHolder ID="nav" runat="server">
-            </asp:ContentPlaceHolder>
-           <%-- <ul class="menu">
-                <li class="menu__item">
-                    <a class="menu__link is-active" href="#">Dashboard</a>
-                </li>
-            </ul>--%>
-        </nav>
-        <main class="admin__main">
-            <div class="dashboard">
-            <asp:ContentPlaceHolder ID="body" runat="server">
-            </asp:ContentPlaceHolder>
+
+            </main>
+            <footer class="admin__footer">
+                <span>&copy; 2022 Company Inc.</span>
+                <span><a href="#1" class="help">Ask for help</a></span>
+            </footer>
         </div>
-                
-        </main>
-        <footer class="admin__footer">
-            <span>&copy; 2018 Company Inc.</span>
-            <span><a href="#1" class="help">Ask for help</a></span>
-        </footer>
-    </div>
-        </form>
-    
-    <%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>--%>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <%--<script src="https://code.jquery.com/jquery-3.6.0.js"></script>--%>
 </body>
 </html>

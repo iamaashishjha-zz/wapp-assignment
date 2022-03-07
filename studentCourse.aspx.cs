@@ -16,7 +16,7 @@ namespace wapp
         {
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
             
-            if ((Session["user_id"] != null) && (Session["user_sub_role"].ToString() == "Teacher"))
+            if ((Session["user_id"] != null) && (Session["user_role"].ToString() == "Admin"))
             {
                 if (!IsPostBack)
                 {
@@ -33,7 +33,6 @@ namespace wapp
         private void BindRepeator()
         {
             string CS = ConfigurationManager.ConnectionStrings["mycon"].ConnectionString;
-            //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
             using (SqlConnection con = new SqlConnection(CS))
             {
                 SqlCommand cmd = new SqlCommand("getCourseStudentDetails", con);

@@ -188,11 +188,7 @@ background:#f1f2f7;
     <div class="container bootdey">
         <h1>Our Courses</h1>
     <div class="col-md-3">
-        <!-- <section class="panel">
-            <div class="panel-body">
-                <input type="text" placeholder="Keyword Search" class="form-control" />
-            </div>
-        </section>  -->
+       
         <section class="panel">
             <header class="panel-heading">
                 Category
@@ -222,62 +218,7 @@ background:#f1f2f7;
                 </ul>
             </div>
         </section>
-        <!-- <section class="panel">
-            <header class="panel-heading">
-                Price Range
-            </header>
-            <div class="panel-body sliders">
-                <div id="slider-range" class="slider"></div>
-                <div class="slider-info">
-                    <span id="slider-range-amount"></span>
-                </div>
-            </div>
-        </section>
-
-
-
-        <section class="panel">
-            <header class="panel-heading">
-                Filter
-            </header>
-            <div class="panel-body">
-                <form role="form product-form">
-                    <div class="form-group">
-                        <label>Brand</label>
-                        <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-                            <option>Wallmart</option>
-                            <option>Catseye</option>
-                            <option>Moonsoon</option>
-                            <option>Textmart</option>
-                        </select>
-                        <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">Wallmart</span></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Color</label>
-                        <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-                            <option>White</option>
-                            <option>Black</option>
-                            <option>Red</option>
-                            <option>Green</option>
-                        </select>
-                        <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">White</span></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Type</label>
-                        <select class="form-control hasCustomSelect" style="-webkit-appearance: menulist-button; width: 231px; position: absolute; opacity: 0; height: 34px; font-size: 12px;">
-                            <option>Small</option>
-                            <option>Medium</option>
-                            <option>Large</option>
-                            <option>Extra Large</option>
-                        </select>
-                        <span class="customSelect form-control" style="display: inline-block;"><span class="customSelectInner" style="width: 209px; display: inline-block;">Small</span></span>
-                    </div>
-                    <button class="btn btn-primary" type="submit">Filter</button>
-                </form>
-            </div>
-        </section>
-
-    -->
+        
         <section class="panel">
             <header class="panel-heading">
                 Most Popular Courses
@@ -312,17 +253,17 @@ background:#f1f2f7;
 
         <div class="row product-list">
             <div class="container py-4">
-            <asp:Repeater ID="Repeater1" runat="server">  
+            <asp:Repeater ID="Repeater1" runat="server"  OnItemDataBound = "OnItemDataBound" onitemcommand="myRepeater_ItemCommand">  
                 <ItemTemplate>  
                     <div class="col-md-4">
                 <section class="panel">
                     <div class="pro-img-box">
                         <img src="asp.png" alt="" />
-                        <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# Eval("image") %>'/>
-                        <a href="#" class="adtocart" runat="server" onserverclick="btnBuyCourse_Click">
-                            <i class="fa fa-shopping-cart">
-                            </i>
-                        </a>
+                        <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# Eval("image") %>' style="width: 100%; height:150px;"/>
+                        
+                        <asp:LinkButton ID="lnkDelete" runat="server" CommandName="enroll" CssClass="mt-2 btn btn-lg btn-block btn-success"
+                            OnClientClick='javascript:return confirm("Are you sure you want to enroll?")'
+                            CommandArgument='<%# DataBinder.Eval(Container.DataItem, "courseId") %>'>Enroll</asp:LinkButton>
                     </div>
                     <div class="panel-body text-center">
                         <h4>
@@ -338,7 +279,6 @@ background:#f1f2f7;
                     </div>
                 </section>
             </div>
-                      
                 </ItemTemplate>  
             </asp:Repeater>  
         </div>

@@ -81,25 +81,46 @@ namespace wapp
             }
         }
 
-        protected void btnBuyCourse_Click(object sender, EventArgs e)
+
+        protected void OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                //Reference the Repeater Item.
+                RepeaterItem item = e.Item;
 
-            int user_id = (int)Session["user_id"];
-            DateTime date = DateTime.Now;
-            string course_id = ((Label)Repeater1.Items[0].FindControl("lblCourseId")).Text;
-
-
-            string query = "INSERT INTO tblStudentCourse VALUES(@user_id, @course_id, @created_at)";
-            SqlCommand cmd = new SqlCommand(query);
-            cmd.Parameters.AddWithValue("@user_id", user_id);
-            cmd.Parameters.AddWithValue("@course_id", course_id);
-            cmd.Parameters.AddWithValue("@created_at", date);
-            cmd.Connection = con;
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-            Response.Redirect("~/home.aspx");
+                //Reference the Controls.
+                string courseId = (item.FindControl("lblCourseId") as Label).Text;
+            }
 
         }
+
+        protected void myRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName == "enroll")
+            {
+                string textbox = e.Item.ItemIndex.ToString();
+                textbox = "myTextBox" + textbox;
+                var nme = e.Item.FindControl(textbox);
+                string courseId = (e.Item.FindControl("lblCourseId") as Label).Text;
+
+                int user_id = (int)Session["user_id"];
+                DateTime date = DateTime.Now;
+                //string course_id = ((Label)Repeater1.Items[0].FindControl("lblCourseId")).Text;
+
+                string query = "INSERT INTO tblStudentCourse VALUES(@user_id, @course_id, @created_at)";
+                SqlCommand cmd = new SqlCommand(query);
+                cmd.Parameters.AddWithValue("@user_id", user_id);
+                cmd.Parameters.AddWithValue("@course_id", courseId);
+                cmd.Parameters.AddWithValue("@created_at", date);
+                cmd.Connection = con;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                Response.Redirect("~/home.aspx");
+            }
+        }
+
+
     }
 }

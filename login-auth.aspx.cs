@@ -48,6 +48,7 @@ namespace wapp
                     int id = (int)sdrLogin["id"];
                     string role = (string)sdrLogin["role"];
                     string sub_role = (string)sdrLogin["sub_role"];
+                    string name = (string)sdrLogin["name"];
                     if (sub_role != null)
                     {
                         Session["user_sub_role"] = sub_role;
@@ -58,7 +59,8 @@ namespace wapp
                     }
                     Session["user_id"] = id;
                     Session["user_role"] = role;
-                    
+                    Session["user_name"] = name;
+
                     Session["user_email"] = email;
                     Response.Redirect("~/home.aspx");
 

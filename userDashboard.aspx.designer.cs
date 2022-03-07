@@ -15,15 +15,6 @@ namespace wapp
     {
 
         /// <summary>
-        /// grdUsers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdUsers;
-
-        /// <summary>
         /// txtName control.
         /// </summary>
         /// <remarks>
@@ -60,6 +51,15 @@ namespace wapp
         protected global::System.Web.UI.WebControls.TextBox txtPassword;
 
         /// <summary>
+        /// txtCPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCPassword;
+
+        /// <summary>
         /// slctSubRole1 control.
         /// </summary>
         /// <remarks>
@@ -76,5 +76,14 @@ namespace wapp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddUser;
+
+        /// <summary>
+        /// grdUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdUsers;
     }
 }

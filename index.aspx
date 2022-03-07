@@ -3,6 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <link href="Shared/coursesStyles.css" rel="stylesheet" />
+
     <style>
         
     </style>
@@ -45,7 +46,7 @@
                 <asp:Repeater ID="Repeater1" runat="server">  
                 <ItemTemplate>  
                      <div class="thumbnail">
-                    <img src="<%#Eval("image")%>" alt="<%#Eval("description")%>">
+                    <img src="<%#Eval("image")%>" alt="<%#Eval("description")%>" style="width: 200px; height:200px;">
                     <div class="product-details">
                         <h2><%#Eval("name")%></h2>
                         <p>Start Date : <span><%#Eval("start_date")%></span</p>

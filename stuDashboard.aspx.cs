@@ -13,9 +13,7 @@ namespace wapp
     public partial class stuDashboard : System.Web.UI.Page
     {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
-        SqlDataAdapter adapt;
-        DataTable dt;
-        DataTable dt2;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if ((Session["user_id"] != null) && (Session["user_sub_role"].ToString() == "Student"))
@@ -55,24 +53,31 @@ namespace wapp
             if (Page.IsValid)
             {
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
-
+                string cpassword = txtCPassword.Text;
+                string sspassword = txtPassword.Text;
                 string ssname = txtTName.Text;
                 string ssemail = txtEmail.Text;
                 string ssaddress = txtAddress.Text;
-                string sspassword = txtPassword.Text;
+
                 int ssuser_id = (int)Session["user_id"];
 
-                SqlCommand cmd = new SqlCommand("Update tblUsers set name='" + ssname + "',email='" + ssemail + "',address='" + ssaddress + "',password='" + sspassword + "' where ID=" + ssuser_id, con);
-                con.Open();
+                string query = "Update tblUsers set name='" + ssname + "',email='" + ssemail + "',address='" + ssaddress + "',password='" + sspassword + "' where ID=" + ssuser_id;
+                SqlCommand cmd;
+                if (cpassword == sspassword)
+                {
+                    cmd = new SqlCommand(query, con);
+                    con.Open();
 
-                cmd.Connection = con;
-                cmd.ExecuteNonQuery();
-                con.Close();
+                    cmd.Connection = con;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
 
                 txtTName.Text = null;
                 txtEmail.Text = null;
                 txtAddress.Text = null;
                 txtPassword.Text = null;
+
             }
 
             

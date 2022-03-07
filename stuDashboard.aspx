@@ -4,53 +4,7 @@
     Student Dashboard
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="nav" runat="server">
-    <ul class="menu">
-    <% if (Session["user_sub_role"].ToString() == "Teacher")
-            { %>
-        <li class="menu__item">
-            <a class="menu__link is-active" href="#">Teacher Dashboard</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="teachDashboard.aspx">Update Information</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="courseDashboard.aspx">Course</a>
-        </li>
-          <li class="menu__item">
-            <a class="menu__link" href="teachStudent.aspx">Teacher Dashboard</a>
-        </li>
-        <% } %>
-        <% if (Session["user_sub_role"].ToString() == "Student")
-            { %>
-        <li class="menu__item">
-            <a class="menu__link" href="#">Student Dashboard</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="stuDashboard.aspx">Update Information</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link is_active" href="stuCourses.aspx">My Courses</a>
-        </li>
-        <% } %>
-        <% if (Session["user_role"].ToString() == "Admin")
-            { %>
-        <li class="menu__item">
-            <a class="menu__link" href="#">Admin Dashboard</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="feedBackDashboard.aspx">Feedbacks</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="studentCourse.aspx">Students Information</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="userDashboard.aspx">User Settings</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
-        </li>
-        <% } %>
-    </ul>
+    
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
@@ -61,58 +15,23 @@
             border-width: 1px;
         }
         .auto-style2 {
-            height: 32px;<ul class="menu">
-        <% if (Session["user_sub_role"].ToString() == "Teacher")
-            { %>
-        <li class="menu__item">
-            <a class="menu__link is-active" href="#">Teacher Dashboard</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="teachDashboard.aspx">Update Information</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="courseDashboard.aspx">Course</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link is_active" href="noteDashboard.aspx">Notes</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="studentCourse.aspx">View Courses</a>
-        </li>
-        <% } %>
-        <% if (Session["user_sub_role"].ToString() == "Student")
-            { %>
-        <li class="menu__item">
-            <a class="menu__link is-active" href="#">Student Dashboard</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="stuDashboard.aspx">Update Information</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="stuCourses.aspx">View Courses</a>
-        </li>
-        <% } %>
-        <% if (Session["user_role"].ToString() == "Admin")
-            { %>
-        <li class="menu__item">
-            <a class="menu__link" href="#">Admin Dashboard</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="feedBackDashboard.aspx">Feedbacks</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="userDashboard.aspx">User Settings</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link is_active" href="courseDashboard.aspx">Course</a>
-        </li>
-        <li class="menu__item">
-            <a class="menu__link" href="studentCourse.aspx">Students Information</a>
-        </li>
-        <% } %>
-        
-    </ul>
+            height: 32px;
         }
+        .card__content>.card__item>.studentInfoTable td:first-child{
+            color:black;
+            font-size:large;
+            font-weight:bold;
+            text-align:right;
+            width:20%;
+        }
+        .card__content>.card__item>.studentInfoTable td:nth-child(2){
+            /*color:black;
+            font-size:large;
+            font-weight:bold;*/
+            text-align:left;
+            width:80%;
+        }
+        
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
@@ -123,52 +42,46 @@
             </div>
             <div class="card__content">
                 <div class="card__item">
-                    <table border="0" cellpadding="2" cellspacing="3" style="border-collapse: collapse" width="1020px">
-                        <tr>
-                            <td Width="50%" >Name:</td>
-                            <td Width="50%" ><asp:TextBox ID="txtTName" runat="server"  Width="100%" /></td>
-                        </tr>
-                        <tr>
-                            <td Width="50%" >Email :</td>
-                            <td Width="50%" ><asp:TextBox ID="txtEmail" runat="server" Width="100%" /></td>
-                        </tr>
-                        <tr>
-                            <td Width="50%" class="auto-style2" >Address :</td>
-                            <td Width="50%" class="auto-style2" ><asp:TextBox ID="txtAddress" runat="server" Width="100%" /></td>
-                        </tr>
-                        <tr>
-                            <td Width="50%" >Password :</td>
-                            <td Width="50%" ><asp:TextBox ID="txtPassword" TextMode="Password" runat="server" Width="100%" /></td>
-                        </tr>
-                        <tr style="width: 150px;display:inline-block; text-align:center">
-                           <td colspan="2"  Width="100%" >
-                                <asp:Button ID="btnUpdateInfo" runat="server" Text="Update" OnClick="btnUpdateInfo_Click" BackColor="#66FF33" ForeColor="White" Width="250px" ValidationGroup="stuValidation" />
-                            </td>
-                        </tr>
+                    
+                    <table class="table studentInfoTable">
+                        <tbody>
+                            <tr>
+                                <td>Name :</td>
+                                <td><asp:TextBox ID="txtTName" runat="server" Width="100%"  CssClass="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td>Email :</td>
+                                <td><asp:TextBox ID="txtEmail" runat="server" Width="100%" ReadOnly="True"  CssClass="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td>Address :</td>
+                                <td><asp:TextBox ID="txtAddress" runat="server" Width="100%"  CssClass="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td>Password :</td>
+                                <td><asp:TextBox ID="txtPassword" TextMode="Password" runat="server" Width="100%"  CssClass="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td>Confirm Password :</td>
+                                <td><asp:TextBox ID="txtCPassword" TextMode="Password" runat="server" Width="100%"  CssClass="form-control" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="text-center"><asp:Button ID="btnUpdateInfo" runat="server" Text="Update" OnClick="btnUpdateInfo_Click" ValidationGroup="stuValidation" CssClass="form-control btn btn-info btn-lg btn-block" /></td>
+                            </tr>
+                        </tbody>
                     </table>
-                    <br />
-                    <table cellpadding="2" class="auto-style1">
-                        <tr>
-                            <td>
+                    <asp:Panel ID="Panel1" runat="server">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtTName" Display="Dynamic" ErrorMessage="Name is required" ForeColor="Red" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+                        <br />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEmail" Display="Dynamic" ErrorMessage="Email is Required" ForeColor="Red" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+                        <br />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtAddress" Display="Dynamic" ErrorMessage="Address Is Required" ForeColor="Red" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
+                        <br />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtPassword" Display="Dynamic" ErrorMessage="Password is required" ForeColor="Red" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
-                            </td>
-                        </tr>
-                    </table>
+                                <br />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtCPassword" ErrorMessage="Confirm Password is Required" ForeColor="Red" Display="Dynamic" ValidationGroup="stuValidation"></asp:RequiredFieldValidator>
+                    </asp:Panel>
+                    
                 </div>
             </div>
         </div>
