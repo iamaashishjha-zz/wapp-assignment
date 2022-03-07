@@ -7,11 +7,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="nav" runat="server">
     <li><asp:Button ID="btnDashboard" runat="server" Text="Dashboard"  CssClass="button" OnClick="btnDashboard_Click"/></li>
     <li><asp:Button ID="btnLogout" runat="server" Text="Log Out" CssClass="button" OnClick="btnLogout_Click" /></li>
-    
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="body" runat="server">
     <div class="slideshow-container">
-
             <div class="mySlides fade">
                 <img src="Images/1-01.png" style="width: 100%">
                 <div class="text"></div>

@@ -23,7 +23,6 @@ namespace wapp
             {
                 if (!IsPostBack)
                 {
-                    
                     shwFeedbackGrid();
                 }
             }
@@ -45,6 +44,7 @@ namespace wapp
             {
                 grdFeedback.DataSource = dt3;
                 grdFeedback.DataBind();
+
             }
             con.Close();
         }

@@ -118,9 +118,6 @@ namespace wapp
                     imgCourse.PostedFile.SaveAs(Server.MapPath("~/Images/Courses/" + str));
                     string imgUpload = "/Images/Courses/" + str.ToString();
 
-
-
-
                     int user_id = (int)Session["user_id"];
 
                     string query = "INSERT INTO tblCourses VALUES(@name, @description, @start_date, @end_date, @user_id, @created_at, @category, @image)";
