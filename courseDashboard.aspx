@@ -75,15 +75,31 @@
                             </tr>
                             <tr>
                                 <td colspan="2" class="text-center">
-                                    <asp:Button ID="btnAddCourse" runat="server" Text="Add Course" OnClick="btnAddCourse_Click" CssClass="form-control btn btn-lg btn-success btn-block" />
+                                    <asp:Button ID="btnAddCourse" runat="server" Text="Add Course" OnClick="btnAddCourse_Click" CssClass="form-control btn btn-lg btn-success btn-block" ValidationGroup="courseCreate" />
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
                     <asp:Panel ID="Panel1" runat="server">
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Course Name is Required" ControlToValidate="txtCName" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Course Name is Required" ControlToValidate="txtCName" ForeColor="Red" ValidationGroup="courseCreate"></asp:RequiredFieldValidator>
                         <br />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDescription" ErrorMessage="Description is required" ForeColor="Red" ValidationGroup="courseCreate"></asp:RequiredFieldValidator>
+                        <br />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="imgCourse" ErrorMessage="Image is required" ForeColor="Red" ValidationGroup="courseCreate"></asp:RequiredFieldValidator>
+                        <br />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtStartDate" ErrorMessage="Start Date is required" ForeColor="Red" ValidationGroup="courseCreate"></asp:RequiredFieldValidator>
+                        <br />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtEndDate" ErrorMessage="End Date is required" ForeColor="Red" ValidationGroup="courseCreate"></asp:RequiredFieldValidator>
+                        <br />
+                        <br />
+                       <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtUDescription" ErrorMessage="Description is required for update" ForeColor="Red" ValidationGroup="courseUpdate"></asp:RequiredFieldValidator>
+                        <br />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtUStartDate" ErrorMessage="Start Date is Required" ForeColor="Red" ValidationGroup="courseUpdate"></asp:RequiredFieldValidator>
+                        <br />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtUEndDate" ErrorMessage="End Date is Required" ForeColor="Red" ValidationGroup="courseUpdate"></asp:RequiredFieldValidator>
+                        <br />--%>
+
                     </asp:Panel>
                 </div>
             </div>
@@ -133,7 +149,7 @@
                                     <asp:Label ID="lbl_description" runat="server" Text='<%#Eval("description") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control" Text='<%#Eval("description") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtUDescription" runat="server" CssClass="form-control" Text='<%#Eval("description") %>'></asp:TextBox>
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Start Date">
@@ -141,7 +157,7 @@
                                     <asp:Label ID="lbl_start_date" runat="server"  Text='<%#Eval("start_date") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtStartDate" TextMode="Date" CssClass="form-control"  runat="server" Text='<%#Eval("start_date") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtUStartDate" TextMode="Date" CssClass="form-control"  runat="server" Text='<%#Eval("start_date") %>'></asp:TextBox>
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="End Date">
@@ -149,26 +165,18 @@
                                     <asp:Label ID="lbl_end_date" runat="server" Text='<%#Eval("end_date") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtEndDate" TextMode="Date" CssClass="form-control"  runat="server" Text='<%#Eval("end_date") %>'></asp:TextBox>
+                                    <asp:TextBox ID="txtUEndDate" TextMode="Date" CssClass="form-control"  runat="server" Text='<%#Eval("end_date") %>'></asp:TextBox>
                                 </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Image">
                                 <ItemTemplate>
-                                    <asp:Image ID="imgCourse" runat="server" ImageUrl='<%# Eval("image") %>' Height="100px" Width="100px" style="border-radius:50%;"/>
+                                    <asp:Image ID="imgUCourse" runat="server" ImageUrl='<%# Eval("image") %>' Height="100px" Width="100px" style="border-radius:50%;"/>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Category">
                                 <ItemTemplate>
                                     <asp:Label ID="lbl_category" runat="server"  Text='<%#Eval("category") %>'></asp:Label>
                                 </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:DropDownList ID="slctSubRole1" CssClass="select-dropdown dropdown form-control" runat="server" Width="100%">
-                                        <asp:ListItem Text="Software Development" CssClass="dropdown-item  form-control" Value="Software Development" />
-                                        <asp:ListItem Text="UI / UX Designing" CssClass="dropdown-item form-control" Value="UI / UX Designing" />
-                                        <asp:ListItem Text="Cyber Security" CssClass="dropdown-item form-control" Value="Cyber Security" />
-                                        <asp:ListItem Text="Data Science" CssClass="dropdown-item form-control" Value="Data Science" />
-                                    </asp:DropDownList>
-                                </EditItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Created At">
                                 <ItemTemplate>

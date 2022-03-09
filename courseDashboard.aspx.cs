@@ -59,24 +59,28 @@ namespace wapp
         protected void grdCourses_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
         {
             //Finding the controls from Gridview for the row which is going to update  
-            Label id = grdCourses.Rows[e.RowIndex].FindControl("lbl_ID") as Label;
-            TextBox name = grdCourses.Rows[e.RowIndex].FindControl("txtName") as TextBox;
-            TextBox description = grdCourses.Rows[e.RowIndex].FindControl("txtDescription") as TextBox;
-            TextBox start_date = grdCourses.Rows[e.RowIndex].FindControl("txtStartDate") as TextBox;
-            TextBox end_date = grdCourses.Rows[e.RowIndex].FindControl("txtEndDate") as TextBox;
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
+            //Page.Validate("courseUpdate");
+            //if (Page.IsValid)
+            //{
+                Label id = grdCourses.Rows[e.RowIndex].FindControl("lbl_ID") as Label;
+                TextBox name = grdCourses.Rows[e.RowIndex].FindControl("txtUName") as TextBox;
+                TextBox description = grdCourses.Rows[e.RowIndex].FindControl("txtUDescription") as TextBox;
+                TextBox start_date = grdCourses.Rows[e.RowIndex].FindControl("txtUStartDate") as TextBox;
+                TextBox end_date = grdCourses.Rows[e.RowIndex].FindControl("txtUEndDate") as TextBox;
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
-            con.Open();
-            //updating the record  
-            SqlCommand cmd = new SqlCommand("Update tblCourses set name='" + name.Text + "',description='" 
-                + description.Text + "',start_date='" + start_date.Text + "',end_date='" + end_date.Text +
-                "' where ID=" + Convert.ToInt32(id.Text), con);
-            cmd.ExecuteNonQuery();
-            con.Close();
-            //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
-            grdCourses.EditIndex = -1;
-            //Call ShowData method for displaying updated data  
-            shwCourseGrid();
+                con.Open();
+                //updating the record  
+                SqlCommand cmd = new SqlCommand("Update tblCourses set name='" + name.Text + "',description='"
+                    + description.Text + "',start_date='" + start_date.Text + "',end_date='" + end_date.Text +
+                    "' where ID=" + Convert.ToInt32(id.Text), con);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
+                grdCourses.EditIndex = -1;
+                //Call ShowData method for displaying updated data  
+                shwCourseGrid();
+            //}
         }
         protected void grdCourses_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
@@ -103,7 +107,7 @@ namespace wapp
             dt2 = new DataTable();
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
 
-            Page.Validate("stuValidation");
+            Page.Validate("courseCreate");
             if (Page.IsValid)
             {
                 if (imgCourse.HasFile)

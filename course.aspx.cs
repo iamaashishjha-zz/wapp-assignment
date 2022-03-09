@@ -99,25 +99,31 @@ namespace wapp
         {
             if (e.CommandName == "enroll")
             {
-                string textbox = e.Item.ItemIndex.ToString();
-                textbox = "myTextBox" + textbox;
-                var nme = e.Item.FindControl(textbox);
-                string courseId = (e.Item.FindControl("lblCourseId") as Label).Text;
+                string sub_role_user = Session["user_sub_role"].ToString();
+                if(sub_role_user == "Student")
+                {
+                    string textbox = e.Item.ItemIndex.ToString();
+                    textbox = "myTextBox" + textbox;
+                    var nme = e.Item.FindControl(textbox);
+                    string courseId = (e.Item.FindControl("lblCourseId") as Label).Text;
 
-                int user_id = (int)Session["user_id"];
-                DateTime date = DateTime.Now;
-                //string course_id = ((Label)Repeater1.Items[0].FindControl("lblCourseId")).Text;
-
-                string query = "INSERT INTO tblStudentCourse VALUES(@user_id, @course_id, @created_at)";
-                SqlCommand cmd = new SqlCommand(query);
-                cmd.Parameters.AddWithValue("@user_id", user_id);
-                cmd.Parameters.AddWithValue("@course_id", courseId);
-                cmd.Parameters.AddWithValue("@created_at", date);
-                cmd.Connection = con;
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-                Response.Redirect("~/home.aspx");
+                    int user_id = (int)Session["user_id"];
+                    DateTime date = DateTime.Now;
+                    string query = "INSERT INTO tblStudentCourse VALUES(@user_id, @course_id, @created_at)";
+                    SqlCommand cmd = new SqlCommand(query);
+                    cmd.Parameters.AddWithValue("@user_id", user_id);
+                    cmd.Parameters.AddWithValue("@course_id", courseId);
+                    cmd.Parameters.AddWithValue("@created_at", date);
+                    cmd.Connection = con;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    Response.Redirect("~/home.aspx");
+                }
+                else
+                {
+                    Response.Redirect("~/register-auth.aspx");
+                }
             }
         }
 

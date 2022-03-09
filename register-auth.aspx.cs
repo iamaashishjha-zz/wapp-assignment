@@ -32,68 +32,64 @@ namespace wapp
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
-            
+
             SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["mycon"].ToString());
-            string name = txtName.Text;
-            string email = txtEmail.Text;
-            string password = txtPassword.Text;
-            string address = txtAddress.Text;
-            string role = "User";
-            string sub_role_value = slctRole.SelectedItem.Value;
-            
-
-            try
+            Page.Validate("registerValidation");
+            if (Page.IsValid)
             {
-                con.Open();
-                string emailcheckquery = "select * from tblUsers where email='" + email + "'";
-                SqlCommand emailcheckcmd = new SqlCommand(emailcheckquery, con);
+                string name = txtName.Text;
+                string email = txtEmail.Text;
+                string password = txtPassword.Text;
+                string address = txtAddress.Text;
+                string role = "User";
+                string sub_role_value = slctRole.SelectedItem.Value;
 
-                SqlDataReader sdr = emailcheckcmd.ExecuteReader();
-                if (sdr.Read())
+
+                try
                 {
-                    Session["error"] = "Email Already Registered. Login";
-                    Session["user_email"] = txtEmail.Text;
+                    con.Open();
+                    string emailcheckquery = "select * from tblUsers where email='" + email + "'";
+                    SqlCommand emailcheckcmd = new SqlCommand(emailcheckquery, con);
+
+                    SqlDataReader sdr = emailcheckcmd.ExecuteReader();
+                    if (sdr.Read())
+                    {
+                        Session["error"] = "Email Already Registered. Login";
+                        Session["user_email"] = txtEmail.Text;
+                        Response.Redirect("~/login-auth.aspx");
+                    }
+                    else
+                    {
+                        lblError.Visible = true;
+                        lblError.Text = "Invalid Email/Passwords";
+                    }
+                    sdr.Close();
+                    emailcheckcmd.Dispose();
+                    string qry = "insert into tblUsers(name,email,address,password,role,sub_role) values('" + name + "','" + email + "', '" + address + "', '" + password + "','" + role + "','" + sub_role_value + "')";
+                    SqlCommand cmd = new SqlCommand(qry, con);
+                    SqlDataAdapter ds = new SqlDataAdapter();
+                    ds.InsertCommand = cmd;
+                    ds.InsertCommand.ExecuteNonQuery();
+                    cmd.Dispose();
+                    Session["error"] = "Email Registered Successfully. Login Now";
                     Response.Redirect("~/login-auth.aspx");
+
                 }
-                else
+                catch (Exception ex)
                 {
                     lblError.Visible = true;
-                    lblError.Text = "Invalid Email/Passwords";
+                    lblError.Text = "<b>Registration Failed. Because, </b>" + ex;
                 }
-                sdr.Close();
-                emailcheckcmd.Dispose();
-                string qry = "insert into tblUsers(name,email,address,password,role,sub_role) values('" + name + "','" + email + "', '" + address + "', '" + password + "','" + role + "','" + sub_role_value + "')";
-                SqlCommand cmd = new SqlCommand(qry, con);
-                SqlDataAdapter ds = new SqlDataAdapter();
-                ds.InsertCommand = cmd;
-                ds.InsertCommand.ExecuteNonQuery();
-                cmd.Dispose();
-                //cmd.Parameters.AddWithValue("name", name);
-                //cmd.Parameters.AddWithValue("email", email);
-                //cmd.Parameters.AddWithValue("address", address);
-                //cmd.Parameters.AddWithValue("password", password);
-                //cmd.Parameters.AddWithValue("role", role);
-                //cmd.Parameters.AddWithValue("sub_role", sub_role_value);
-                
-                //cmd.ExecuteNonQuery();
-                Session["error"] = "Email Registered Successfully. Login Now";
-                Response.Redirect("~/login-auth.aspx");
-
-            }
-            catch (Exception ex)
-            {
-                lblError.Visible = true;
-                lblError.Text = "<b>Registration Failed. Because, </b>" + ex;
-            }
-            finally
-            {
-                txtName.Text = "";
-                txtEmail.Text = "";
-                txtEmail.Text = "";
-                txtPassword.Text = "";
-                slctRole.SelectedIndex = 0;
-                txtCPassword.Text = "";
-                con.Close();
+                finally
+                {
+                    txtName.Text = "";
+                    txtEmail.Text = "";
+                    txtEmail.Text = "";
+                    txtPassword.Text = "";
+                    slctRole.SelectedIndex = 0;
+                    txtCPassword.Text = "";
+                    con.Close();
+                }
             }
         }
     }
